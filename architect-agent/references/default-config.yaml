@@ -1,0 +1,89 @@
+version: "1.0"
+
+# ─── SKILLS ──────────────────────────────────────────────────────────────────
+# Each skill-id maps to an independent skill at: skills/<skill-id>/SKILL.md
+# To add a new skill:
+#   1. Run: python3 ~/.claude/skills/skill-creator/scripts/init_skill.py <id> --path architect-agent/skills
+#   2. Edit architect-agent/skills/<id>/SKILL.md
+#   3. Add the entry below
+
+skills:
+  system-design:
+    name: "System Design"
+    description: "Design high-level system architecture, components, and interactions"
+
+  api-design:
+    name: "API Design"
+    description: "Design RESTful or GraphQL API contracts and interfaces"
+
+  db-design:
+    name: "Database Design"
+    description: "Design database schemas, data models, and storage strategy"
+
+  security-review:
+    name: "Security Review"
+    description: "Review design for security vulnerabilities and best practices"
+
+  performance-analysis:
+    name: "Performance Analysis"
+    description: "Analyze architecture for performance bottlenecks and scalability"
+
+  tech-selection:
+    name: "Technology Selection"
+    description: "Evaluate and recommend technology stack choices"
+
+# ─── TASKS ───────────────────────────────────────────────────────────────────
+
+tasks:
+  full-system-design:
+    name: "Full System Design"
+    description: "End-to-end architectural design covering system, data, API, security, and performance"
+    pipeline:
+      - name: "System Architecture"
+        parallel: false
+        skills: [system-design]
+      - name: "Data & API Layer"
+        parallel: true
+        skills: [db-design, api-design]
+      - name: "Security & Performance"
+        parallel: true
+        skills: [security-review, performance-analysis]
+
+  api-first-design:
+    name: "API-First Design"
+    description: "Design starting from API contracts, then derive supporting infrastructure"
+    pipeline:
+      - name: "API Contracts"
+        parallel: false
+        skills: [api-design]
+      - name: "Supporting Infrastructure"
+        parallel: true
+        skills: [db-design, system-design]
+      - name: "Security Review"
+        parallel: false
+        skills: [security-review]
+
+  architecture-review:
+    name: "Architecture Review"
+    description: "Comprehensive review of an existing system's architecture"
+    pipeline:
+      - name: "System Analysis"
+        parallel: false
+        skills: [system-design]
+      - name: "Risk Assessment"
+        parallel: true
+        skills: [security-review, performance-analysis]
+
+  tech-evaluation:
+    name: "Technology Evaluation"
+    description: "Evaluate technology choices for a new system or migration"
+    pipeline:
+      - name: "Requirements Analysis"
+        parallel: false
+        skills: [system-design]
+      - name: "Tech Selection"
+        parallel: false
+        skills: [tech-selection]
+      - name: "Risk Review"
+        parallel: true
+        skills: [security-review, performance-analysis]
