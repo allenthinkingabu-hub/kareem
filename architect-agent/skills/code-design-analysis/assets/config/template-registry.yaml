@@ -1,0 +1,105 @@
+# Template Registry
+# Maps: scope × layer → template file(s)
+# as_is:      Phase 4 investigation templates (current state)
+# evaluation: Phase 5 gap analysis templates
+# to_be:      Phase 6 improvement direction templates
+#
+# YAML key uses underscore (to_be); filesystem path uses hyphen (to-be/)
+# Output filenames: outputs/{scope}-{LAYER}-{id}.md
+
+scopes:
+  class:
+    as_is:
+      - id: CLS-AS-01
+        name: "Class Responsibility & Behavior Analysis"
+        file: assets/templates/class/as-is/cls-responsibility-analysis.md
+        output: outputs/class-AS-IS-CLS-AS-01.md
+        description: Full public/private interface inventory, responsibilities taxonomy, SRP compliance, lifecycle mapping
+      - id: CLS-AS-02
+        name: "Class Dependency Map"
+        file: assets/templates/class/as-is/cls-dependency-map.md
+        output: outputs/class-AS-IS-CLS-AS-02.md
+        description: Inbound callers, outbound dependencies, external system touchpoints, coupling assessment
+      - id: CLS-AS-03
+        name: "Design Pattern Identification"
+        file: assets/templates/class/as-is/cls-design-patterns.md
+        output: outputs/class-AS-IS-CLS-AS-03.md
+        description: Applied GoF patterns, architectural patterns, anti-patterns detected, SOLID compliance
+    evaluation:
+      - id: CLS-EV-01
+        name: "Requirements vs Current State Gap Analysis"
+        file: assets/templates/class/evaluation/cls-gap-analysis.md
+        output: outputs/class-EVAL-CLS-EV-01.md
+        description: FR/NFR gap matrix with severity ratings, risk register, technical debt items
+    to_be:
+      - id: CLS-TB-01
+        name: "Improvement Direction & Principles"
+        file: assets/templates/class/to-be/cls-improvement-direction.md
+        output: outputs/class-TOBE-CLS-TB-01.md
+        description: Improvement directions for critical/moderate gaps; design principles, trade-offs, prerequisites
+
+  method:
+    as_is:
+      - id: MTH-AS-01
+        name: "Method Algorithm & Behavior Analysis"
+        file: assets/templates/method/as-is/mth-algorithm-analysis.md
+        output: outputs/method-AS-IS-MTH-AS-01.md
+        description: Algorithm steps, signature contract, inputs/outputs, complexity, edge case handling
+      - id: MTH-AS-02
+        name: "Call Chain & Side Effects Analysis"
+        file: assets/templates/method/as-is/mth-callchain-analysis.md
+        output: outputs/method-AS-IS-MTH-AS-02.md
+        description: Inbound callers, outbound callees, side effects inventory, state mutations, I/O interactions
+    evaluation:
+      - id: MTH-EV-01
+        name: "Method Quality & Requirements Gap"
+        file: assets/templates/method/evaluation/mth-gap-analysis.md
+        output: outputs/method-EVAL-MTH-EV-01.md
+        description: FR/NFR gap matrix, correctness assessment, quality assessment (readability, testability, SRP)
+    to_be:
+      - id: MTH-TB-01
+        name: "Refactoring Direction"
+        file: assets/templates/method/to-be/mth-refactoring-direction.md
+        output: outputs/method-TOBE-MTH-TB-01.md
+        description: Refactoring directions for critical/moderate gaps; algorithm improvements, contract clarification
+
+  topic:
+    as_is:
+      - id: TOP-AS-01
+        name: "System Participants & Component Map"
+        file: assets/templates/topic/as-is/top-component-map.md
+        output: outputs/topic-AS-IS-TOP-AS-01.md
+        description: All participating components, roles, interaction topology, external system touchpoints
+      - id: TOP-AS-02
+        name: "Cross-Cutting Concern & Data Flow Analysis"
+        file: assets/templates/topic/as-is/top-dataflow-analysis.md
+        output: outputs/topic-AS-IS-TOP-AS-02.md
+        description: Primary data flows, shared state, event/message flows, database interactions, transformation points
+      - id: TOP-AS-03
+        name: "Design Pattern & Architecture Style Identification"
+        file: assets/templates/topic/as-is/top-design-patterns.md
+        output: outputs/topic-AS-IS-TOP-AS-03.md
+        description: Architectural style, applied patterns, anti-patterns, consistency assessment
+    evaluation:
+      - id: TOP-EV-01
+        name: "Topic-Level Requirements Gap Analysis"
+        file: assets/templates/topic/evaluation/top-gap-analysis.md
+        output: outputs/topic-EVAL-TOP-EV-01.md
+        description: FR/NFR gap matrix across topic scope, cross-cutting concerns, architecture compliance
+      - id: TOP-EV-02
+        name: "Risk & Technical Debt Assessment"
+        file: assets/templates/topic/evaluation/top-risk-assessment.md
+        output: outputs/topic-EVAL-TOP-EV-02.md
+        description: Technical risk register, debt register, systemic vulnerability assessment, risk heat map
+    to_be:
+      - id: TOP-TB-01
+        name: "Architectural Improvement Direction"
+        file: assets/templates/topic/to-be/top-improvement-direction.md
+        output: outputs/topic-TOBE-TOP-TB-01.md
+        description: Architectural improvement directions, migration considerations, out-of-scope deferred items
+
+  consolidated:
+    report:
+      file: assets/templates/consolidated/design-analysis-report.md
+      output: outputs/design-analysis-report.md
+      description: Enterprise-level consolidated report (Executive Summary + Parts I–V)

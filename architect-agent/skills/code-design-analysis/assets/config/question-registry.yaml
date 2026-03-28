@@ -1,0 +1,21 @@
+# Question Registry
+# Maps: scope × phase → question file
+# phase1: agent-internal FR/NFR extraction prompts (NOT user-facing dialogue)
+# phase2: user-facing high-level understanding questions
+# phase3: user-facing deep investigation questions
+
+scopes:
+  class:
+    phase1: assets/questions/class/phase1-intent-extraction-prompts.md
+    phase2: assets/questions/class/phase2-target-questions.md
+    phase3: assets/questions/class/phase3-deep-questions.md
+
+  method:
+    phase1: assets/questions/method/phase1-intent-extraction-prompts.md
+    phase2: assets/questions/method/phase2-target-questions.md
+    phase3: assets/questions/method/phase3-deep-questions.md
+
+  topic:
+    phase1: assets/questions/topic/phase1-intent-extraction-prompts.md
+    phase2: assets/questions/topic/phase2-target-questions.md
+    phase3: assets/questions/topic/phase3-deep-questions.md
