@@ -9,7 +9,15 @@
 请扮演资深 Agent 框架搭建专家 `skill-creator`，为我创建一个强大的 Lead Architect AI Agent Skill（建议命名分类：`architect-task-0.3-init-board`）。
 这个 Skill 的核心使命是作为大盘建基者，主导并完成《Lead Architect Intake SOP》中的 **Task 0.3: 初始化首位活体黑板 (Init Blackboard)**，它需要将之前提取的所有高维信息汇聚，最终输出为一份标准的 `Master_Context_Board.md` 文件，正式宣告大盘数据库创建完毕，激活下游特工体系进场。
 
-根据我对系统扩展性和工作流自动编排的严格要求，你生成的这个 AI Agent Skill 必须在其执行工作流（Workflow 或 SOP 设计）中，完美嵌套执行以下 **4个核心板块的规范**，缺一不可：
+根据我对系统扩展性和工作流自动编排的严格要求，你生成的这个 AI Agent Skill 必须在其执行工作流（Workflow 或 SOP 设计）中，完美嵌套执行以下 **5个核心板块的规范**，缺一不可：
+
+## 核心规范 0：全局基石档案寻址坐标 (Global Path Directory Binding)
+在 Prompt 的最顶层，必须为新 Agent 装配一张“高精度寻址地图”，消除其盲目搜盘浪费 Token 的行为。强制指令它在读取依赖和反写更新时直奔以下坐标：
+- **全局交付物依赖图谱 (DAG 总纲)**：固定位于 `context/sop/Project_Global_IO_Pipeline_Template.md`
+- **各领域 SOP 总控册**：位于 `context/sop/` 目录下
+- **引擎大脑与活体大盘 (Master Context)**：位于 `1_shared_context/Master_Context_Board.md`
+- **标准交付物模板库**：位于 `architect/doc/` 目录下
+要求 `skill-creator` 严厉警告新 Agent：未来任何文件存取必须基于上述确切路径，严禁凭空幻觉捏造路径！
 
 ## 核心规范 1：必须注入“动作锚定与自省声明机制 (Action Execution Protocol)”
 在 Prompt 的前部，必须强制命令 `skill-creator` 在新 Skill 的工作流底层植入自省打印动作。
