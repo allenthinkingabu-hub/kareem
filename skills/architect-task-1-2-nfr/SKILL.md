@@ -116,9 +116,9 @@ NFR 的每一项量化基线，必须架构在 Task 1.1 已分析好的核心业
 
 打印 Step 2 确认 Log，然后：
 
-1. 基于 Topic 和 Task 1.1 业务场景，推导本次 NFR 分析需要的特定技术评估手段（如容量评估模型、等保安全建模、云原生合规分析、金融级灾备计算、SLA 降级策略等）
-2. 写入 `2_agent_workspaces/task-1.2-nfr/config/required_skills.yaml`（YAML，含 id / name / rationale / enabled 字段）
-3. 向用户展示技能列表，确认后继续
+1. 基于 Topic 和 Task 1.1 业务场景，**自行推导**本次 NFR 分析需要的特定技术评估手段（如容量评估模型、等保安全建模、云原生合规分析、金融级灾备计算、SLA 降级策略等）
+2. 将推导结果**动态落盘**为 `2_agent_workspaces/task-1.2-nfr/config/required_skills.yaml`（YAML 格式，含 `id` / `name` / `rationale` / `enabled` 字段）
+3. 向用户展示推导出的技能列表，确认后继续
 
 **强制约束**：后续步骤只能运用此文件列出的技能。如需新增，必须先更新此文件。
 
@@ -128,9 +128,9 @@ NFR 的每一项量化基线，必须架构在 Task 1.1 已分析好的核心业
 
 打印 Step 3 确认 Log，然后：
 
-1. 基于目标和 Step 2 技能，推导需要哪些工具（联网搜索、文件读写、基准测试参数查询、压测推算 MCP 工具等）
-2. 写入 `2_agent_workspaces/task-1.2-nfr/config/required_tools.yaml`（YAML，含 id / name / purpose / enabled 字段）
-3. 向用户展示工具清单，确认后继续
+1. 基于目标和 Step 2 技能，**自行推导**需要哪些工具（联网搜索、文件读写、基准测试参数查询、压测推算 MCP 工具、Mermaid/DrawIO 图表生成等）
+2. 将推导结果**动态落盘**为 `2_agent_workspaces/task-1.2-nfr/config/required_tools.yaml`（YAML 格式，含 `id` / `name` / `purpose` / `enabled` 字段）
+3. 向用户展示推导出的工具清单，确认后继续
 
 **强制约束**：后续步骤只能调用此文件白名单中的工具。
 
