@@ -11,6 +11,19 @@ You are executing **Task 1.1: 拆解 Topic 商业与功能目标** - transformin
 
 **Mission**: Read the global context board (Master_Context_Board.md or OUT-0.1), conduct restrained inquiry to fill gaps, perform industry research, design expert questionnaire, conduct customer interview, evolve the template dynamically, and produce the final OUT-1.1 deliverable with downstream impact mapping.
 
+## 全局基石档案寻址坐标 (Global Path Directory Binding)
+
+**⚠️ 严厉警告**: 未来任何文件存取必须基于以下确切路径，**严禁凭空幻觉捏造路径！**
+
+| 资产类型 | 固定路径 |
+|---------|---------|
+| 全局交付物依赖图谱 (DAG 总纲) | `context/sop/Project_Global_IO_Pipeline_Template.md` |
+| 各领域 SOP 总控册 | `context/sop/` 目录下 |
+| 引擎大脑与活体大盘 (Master Context) | `1_shared_context/Master_Context_Board.md` |
+| 标准交付物模板库 | `architect/doc/` 目录下 |
+
+---
+
 ## Action Execution Protocol
 
 **⚠️ CRITICAL**: Before starting each major step (1-9), print a step confirmation log to maintain focus and prevent skipping:
@@ -34,7 +47,7 @@ Execute the **9-step closed-loop SOP**. Read `references/9-step-workflow.md` for
 1. **前置大盘摄入与克制盘问**: Read Master_Context_Board.md or OUT-0.1, identify gaps, ask only when necessary
 2. **动态技术/技能装配**: Identify required architect skills → `1_shared_context/config/task-1.1/required_skills.yaml`
 3. **动态兵器/工具装配**: Identify required tools → `1_shared_context/config/task-1.1/required_tools.yaml`
-4. **行业标准防盲盒预研**: Research industry best practices → `2_agent_workspaces/task-1.1-intake/phases/phase4_research.md`
+4. **行业标准防盲盒预研**: Pre-research gate (pause for user approval) → research → dual-track output: `phase4_research.md` + `Research_Trace_Log.md`
 5. **沉浸式问卷对齐**: Design expert questionnaire → `2_agent_workspaces/task-1.1-intake/phases/phase5_questionnaire.md`
 6. **客户切片访谈与实录入公共库**: Conduct interview → `1_shared_context/meeting_records/Task1.1_Intake_QA_Log.md`
 7. **模版动态进化与强制拦截对齐**: Evolve template and get client sign-off → `2_agent_workspaces/task-1.1-intake/templates/OUT-1.1_Template_Custom.md`
@@ -113,6 +126,7 @@ Before completing Task 1.1, verify all deliverables exist:
 - [ ] `1_shared_context/config/task-1.1/required_tools.yaml`
 - [ ] `1_shared_context/meeting_records/Task1.1_Intake_QA_Log.md`
 - [ ] `2_agent_workspaces/task-1.1-intake/phases/phase4_research.md`
+- [ ] `2_agent_workspaces/task-1.1-intake/phases/Research_Trace_Log.md`
 - [ ] `2_agent_workspaces/task-1.1-intake/phases/phase5_questionnaire.md`
 - [ ] `2_agent_workspaces/task-1.1-intake/templates/OUT-1.1_Template_Custom.md`
 - [ ] `3_final_outputs/OUT-1.1_[Topic].md`

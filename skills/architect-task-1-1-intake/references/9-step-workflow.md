@@ -105,15 +105,22 @@ tools:
 
 ## Step 4: 行业标准防盲盒预研 (Industry Benchmark Research)
 
-**Purpose**: 带工具查全网、企业知识库,找针对当前领域最高行业功能拆解基准
+**Purpose**: 带工具查全网、企业知识库，找针对当前领域最高行业功能拆解基准
+
+**⚠️ 双轨记录制强制要求**: 本步骤必须产出两份文件，缺一不可。
 
 **Actions**:
-1. 严格使用 Step 3 工具白名单,基于 Raw Topic 深入知识库及开放互联网
-2. 寻找目前业内最高水准的权威企业级解决方案和设计思维
-3. 识别行业常见陷阱与反向案例
-4. 整合调研结果,写入 `phase4_research.md`
+1. **强制暂停拦截 (Pre-Research Gate)**: 先列出《拟定调查清单与搜寻策略》（搜索方向、关键词），在终端**强制暂停**，请示用户：
+   > "我要去查以下方向，您看是否需要删减或补充？[列出调查清单]"
+   **必须等待用户审批通过后**，才能继续执行搜索。
 
-**Output Format**:
+2. **严格工具白名单**: 严格使用 Step 3 工具白名单，**绝不允许使用内容农场、过时博客！必须检索专业大厂、近期实效的企业级文献参考。**
+
+3. **双轨落盘**:
+   - **调研结论底稿** → `2_agent_workspaces/task-1.1-intake/phases/phase4_research.md`（高浓缩，启发下一步推导）
+   - **调研历程溯源日志** → `2_agent_workspaces/task-1.1-intake/phases/Research_Trace_Log.md`（记录搜索过哪些 URL、为何抛弃某些检索结果）
+
+**Output Format for phase4_research.md**:
 ```markdown
 # Phase 4: 行业基准预研记录
 
@@ -124,16 +131,28 @@ tools:
 [关键行业发现摘要]
 
 ## 参考架构方案
-[权威解决方案,附来源引用]
+[权威解决方案，附来源引用]
 
 ## 行业常见陷阱与反向案例
 [应避免的已知坑点]
 
 ## 对本次 Topic 的最佳实践建议
-[提炼出的最佳实践,将指导后续问卷设计]
+[提炼出的最佳实践，将指导后续问卷设计]
 ```
 
-**Output**: `2_agent_workspaces/task-1.1-intake/phases/phase4_research.md`
+**Output Format for Research_Trace_Log.md**:
+```markdown
+# Research Trace Log
+
+## 搜索执行记录
+| 搜索关键词 | 来源 URL | 采纳/抛弃 | 抛弃原因 |
+|-----------|---------|----------|---------|
+| [关键词] | [URL] | 采纳/抛弃 | [原因] |
+```
+
+**Output**:
+- `2_agent_workspaces/task-1.1-intake/phases/phase4_research.md`
+- `2_agent_workspaces/task-1.1-intake/phases/Research_Trace_Log.md`
 
 ---
 
