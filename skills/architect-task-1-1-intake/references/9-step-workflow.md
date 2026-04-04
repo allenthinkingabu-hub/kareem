@@ -4,12 +4,17 @@
 
 ---
 
-## Step 1: 前置大盘摄入与克制盘问
+## Step 1: 前置入参摄入与动态看板校验
 
-**⚠️ 核心规范**: NEVER ask the client for macro context. Read the board first.
+**⚠️ 全新加标铁律**: NEVER start working without checking the registry. Prerequisites must ALL be `[DONE]`.
 
 **Actions**:
-1. Read `1_shared_context/Master_Context_Board.md` — extract: business domain, audience, scale, NFR constraints, redlines
+1. **[FIRST]** Read `context/sop/Project_Task_Registry.md` — find current Task ID row
+   - Check every task in `Prerequisites` column
+   - **If ANY prerequisite is NOT `[DONE]` → HALT and report the blocking task name**
+   - Only proceed if ALL prerequisites are `[DONE]`
+2. Read the `Project_Global_IO_Pipeline_Template.md` Artifact Registry to identify exact input dependencies for this Task ID
+3. Read `1_shared_context/Master_Context_Board.md` — extract: business domain, audience, scale, NFR constraints, redlines
 2. If Master Context Board doesn't exist, read `3_final_outputs/OUT-0.1_Core_Business_Intent.md`
 3. Also read any `OUT-0.2`, `OUT-0.3`, or external EXT materials provided
 4. Identify information gaps ONLY in your specialist domain (business scenario decomposition, use cases, feature definition)
@@ -318,20 +323,33 @@ Q9: 如何验证[具体功能]成功？请给出可量化的验收条件。
 
 ---
 
-## Step 9: 全局 SOP 资产反写闭环
+## Step 9: 全局 SOP 资产反写与任务状态结算
 
-**Purpose**: Register the new OUT-1.1 dimensions into the global knowledge base.
+**Purpose**: Register OUT-1.1 into the global knowledge base AND mark this task done in the registry.
 
 **⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-**Actions**:
-1. Edit `context/sop/Architect SOP.md`:
-   - Add Task 1.1 completion record
+**Actions (execute in order)**:
+
+1. Edit `context/sop/Project_Task_Registry.md`:
+   - Find the row for the current Task ID (e.g., `Task-BE-1.1`)
+   - Change `Status` column from current value to `[DONE]`
+   - Fill in today's date in `Last Updated` column
+   - Display the updated row to confirm the change
+
+2. Edit `context/sop/Architect SOP.md`:
+   - Add Task 1.1 completion record with timestamp
    - Note any new template dimensions discovered during this Topic
-2. Edit `context/sop/Project_Global_IO_Pipeline_Template.md`:
+
+3. Edit `context/sop/Project_Global_IO_Pipeline_Template.md`:
    - Add OUT-1.1's new output nodes and their downstream consumers
    - Map: OUT-1.1 UC-xx → OUT-1.2 (NFR derivation), OUT-3.1 (arch candidates), OUT-4.1 (API design)
 
+4. **结印宣告**: Print the following announcement:
+   > "✅ 任务状态结算完成。`Project_Task_Registry.md` 已将 [Task ID] 标记为 `[DONE]`。
+   > OUT-1.1 文档已交付至 `3_final_outputs/`。
+   > 下游就绪任务：[根据 Registry 查询，列出所有 Prerequisites 包含本 Task 且现在可以启动的 Task IDs]"
+
 **State Update**: Set Step 9 → `[DONE]`
 
-> `[🛑 物理硬锁: Step 9 已就绪！Task 1.1 全部完成，OUT-1.1 已交付，Phase 1 继续推进 Task 1.2]`
+> `[🛑 物理硬锁: Step 9 已就绪！Task 1.1 全部完成，Registry 已结算，下游 Task 已宣告就绪]`

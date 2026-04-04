@@ -25,16 +25,30 @@
 
 ### Phase 3: 方案推演与架构决策 (Solution Exploration & Decision)
 **目标**：发散思维，构思多条路，并拍板最合适的一条。
-*   **Task 3.1: 构思备选方案 (Option Generation)**：针对 Topic 至少提出 2-3 种不同的技术方向（例如：方案 A 是侵入式修改现有核心表；方案 B 是旁路监听 MQ 异步处理；方案 C 是引入新微服务剥离职责）。
-*   **Task 3.2: 多维权衡对比 (Trade-off Analysis)**：从开发成本、改动风险、性能表现、架构扩展性四个维度评估这些备选方案。
-*   **Task 3.3: 敲定方案并生成 ADR**：选定最优解，并记录架构决策记录 (Architecture Decision Record：为什么选这个，放弃了什么)。
+*   **Task-BE-3.1: 构思备选方案 (Option Generation)**：
+    *   **Prerequisites**: Task-BE-2.4 [DONE]
+    *   **Description**: 针对 Topic 至少提出 2-3 种不同的技术方向（例如：方案 A 是侵入式修改现有核心表；方案 B 是旁路监听 MQ 异步处理；方案 C 是引入新微服务剥离职责）。
+*   **Task-BE-3.2: 多维权衡对比 (Trade-off Analysis)**：
+    *   **Prerequisites**: Task-BE-3.1 [DONE]
+    *   **Description**: 从开发成本、改动风险、性能表现、架构扩展性四个维度评估这些备选方案。
+*   **Task-BE-3.3: 敲定方案并生成 ADR**：
+    *   **Prerequisites**: Task-BE-3.2 [DONE]
+    *   **Description**: 选定最优解，并记录架构决策记录 (Architecture Decision Record：为什么选这个，放弃了什么)。
 
 ### Phase 4: 详细技术蓝图设计 (Detailed Solution Design)
 **目标**：将拍板的高阶方案，细化为开发能直接看懂的图纸。
-*   **Task 4.1: API 与契约设计**：定义新增或修改的 REST/gRPC/GraphQL 接口规范（入参、出参、错误码）。
-*   **Task 4.2: 领域模型与数据流设计**：设计新增的数据库表结构、数据变更/迁移脚本，以及数据在缓存、DB 之间的流动与一致性保障机制。
-*   **Task 4.3: 模块修改拓扑图 (Component Design)**：精确到代码层级，指出需要新增哪些类/接口，需要修改/废弃哪些旧核心类，以及应用哪些设计模式（如策略模式、责任链等）来应对扩展。
-*   **Task 4.4: 时序设计 (Sequence Diagram)**：梳理新方案下的核心业务流程时序。
+*   **Task-BE-4.1: API 与契约设计 (需对齐前端)**：
+    *   **Prerequisites**: Task-BE-3.3 [DONE], Task-FE-4.1 [DONE]
+    *   **Description**: 定义新增或修改的 REST/gRPC/GraphQL 接口规范（入参、出参、错误码）。
+*   **Task-BE-4.2: 领域模型与数据流设计**：
+    *   **Prerequisites**: Task-BE-4.1 [DONE]
+    *   **Description**: 设计新增的数据库表结构、数据变更/迁移脚本，以及数据在缓存、DB 之间的流动与一致性保障机制。
+*   **Task-BE-4.3: 模块修改拓扑图 (Component Design)**：
+    *   **Prerequisites**: Task-BE-4.2 [DONE]
+    *   **Description**: 精确到代码层级，指出需要新增哪些类/接口，需要修改/废弃哪些旧核心类，以及应用哪些设计模式（如策略模式、责任链等）来应对扩展。
+*   **Task-BE-4.4: 时序设计 (Sequence Diagram)**：
+    *   **Prerequisites**: Task-BE-4.3 [DONE]
+    *   **Description**: 梳理新方案下的核心业务流程时序。
 
 ### Phase 5: 风险阻断与影响面分析 (Risk & Blast Radius Assessment)
 **目标**：作为架构师的“底线思维”，确保新方案不仅能跑，还不能搞崩老系统。

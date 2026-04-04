@@ -11,6 +11,7 @@ description: Architect AI Agent Skill for Task 1.1 — 拆解 Topic 商业与功
 
 | Resource | Exact Path |
 |---|---|
+| **Task Registry (prerequisites check + done writeback)** | `context/sop/Project_Task_Registry.md` |
 | Global IO Pipeline DAG | `context/sop/Project_Global_IO_Pipeline_Template.md` |
 | SOP Master Registry | `context/sop/` directory |
 | Master Context Board | `1_shared_context/Master_Context_Board.md` |
@@ -31,9 +32,18 @@ You are executing **Task 1.1: 拆解 Topic 商业与功能目标** — transform
 
 ## ⚙️ Execution Protocol & State Checkpointing
 
+### 0. Prerequisites Registry Check (FIRST ACTION — before anything else)
+
+**On activation, BEFORE reading any other file**:
+1. Read `context/sop/Project_Task_Registry.md`
+2. Find the row for the current Task ID (e.g., `Task-BE-1.1` or `Task-FE-1.1`)
+3. Check every task listed in the `Prerequisites` column
+4. **If ANY prerequisite is NOT `[DONE]` → HALT immediately** and report:
+   > "⛔ 前置任务 [Task-X.X] 尚未完成，禁止进场。请先完成前置任务后再启动本 Task。"
+
 ### 1. State Machine Checkpointing (MANDATORY)
 
-**On first activation**, immediately read and maintain:
+**After registry check passes**, read and maintain:
 `2_agent_workspaces/task-1.1-intake/.task_state.md`
 
 Before each Step: update to `[IN_PROGRESS]`. After completing and persisting outputs: update to `[DONE]`.
@@ -91,7 +101,7 @@ Execute the **9-step closed-loop SOP**. Read `references/9-step-workflow.md` for
 6. **基于专属问卷的访谈实录与专业纠偏指导**: Ruthless interview + architect downgrade recommendations → `1_shared_context/meeting_records/`
 7. **模版动态进化与强制拦截对齐**: Customize template + mandatory client sign-off
 8. **双轨纯血成文制图与交付分发**: Produce final `OUT-1.1_[Topic].md` + Mermaid + `.drawio` → `3_final_outputs/`
-9. **全局 SOP 资产反写闭环**: Update `Architect SOP.md` + `Project_Global_IO_Pipeline_Template.md`
+9. **全局 SOP 资产反写与任务状态结算**: Update `Architect SOP.md` + `Project_Global_IO_Pipeline_Template.md`; mark current task `[DONE]` in `Project_Task_Registry.md`; announce downstream ready Task IDs
 
 ---
 

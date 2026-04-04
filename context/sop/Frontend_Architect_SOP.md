@@ -18,9 +18,15 @@
 
 ### Phase 2: 现状摸底与工程排雷 (As-Is Audit & Discovery)
 **目标**：对老项目做全方位的“CT 扫描”，抓出现有架构中拖慢首屏、引发内存泄漏乃至难以维护的技术负债。
-*   **Task 2.1: 包体积与依赖深渊排查**：运用分析探针（如 Webpack Bundle Analyzer / source-map-explorer）深入构建产物，抓出冗余重复、Tree-shaking 失效或早已过期的巨型沉船 npm 依赖。
-*   **Task 2.2: 渲染时序与网络拓扑摸底**：通过 Chrome DevTools/Lighthouse 定位现网痛点。包括：长串行请求造成的网络瀑布流、CSS 阻塞渲染黑洞、自定义字体闪烁 (FOUT/FOIT) 以及过度的浏览器主线程 (Main Thread) 锁死。
-*   **Task 2.3: 组件化与状态管理腐化度走查**：扫描出上千行的杂糅“巨石组件”、导致牵一发而动全身（无谓 Re-render）的全局状态乱用点，以及长层级的 Prop Drilling 灾难链路。
+*   **Task-FE-2.1: 包体积与依赖深渊排查**：
+    *   **Prerequisites**: Task-FE-1.3 [DONE]
+    *   **Description**: 运用分析探针（如 Webpack Bundle Analyzer / source-map-explorer）深入构建产物，抓出冗余重复、Tree-shaking 失效或早已过期的巨型沉船 npm 依赖。
+*   **Task-FE-2.2: 渲染时序与网络拓扑摸底**：
+    *   **Prerequisites**: Task-FE-2.1 [DONE]
+    *   **Description**: 通过 Chrome DevTools/Lighthouse 定位现网痛点。包括：长串行请求造成的网络瀑布流、CSS 阻塞渲染黑洞、自定义字体闪烁 (FOUT/FOIT) 以及过度的浏览器主线程 (Main Thread) 锁死。
+*   **Task-FE-2.3: 组件化与状态管理腐化度走查**：
+    *   **Prerequisites**: Task-FE-2.2 [DONE]
+    *   **Description**: 扫描出上千行的杂糅“巨石组件”、导致牵一发而动全身（无谓 Re-render）的全局状态乱用点，以及长层级的 Prop Drilling 灾难链路。
 
 ### Phase 3: 方案推演与架构决策 (Exploration & Decision)
 **目标**：在激进的技术追求与务实的业务迭代间寻找最佳权衡，并以 ADR 将决策过程固化下来。
@@ -31,10 +37,12 @@
 
 ### Phase 4: 蓝图绘制与详细实现设计 (Detailed Solution Design)
 **目标**：输出令前端执行团队能毫无歧义落地的高层图纸与内部接口契约。
-*   **Task 4.1: BFF 层与前后端数据契约设计**：主导端到端接口对齐，理想情况下推行 BFF 范式。若客观受限，必须设计坚固的前端数据适配层 (Adapter/DTO)，隔离后端接口的不良数据结构以免污染前端 UI 层。
-*   **Task 4.2: 组件树拓扑与通信架构抽象**：为核心视图绘制 Component Tree 拓扑。强制约定哪些是连通数据与 Store 的“聪明容器组件” (Smart/Container Components)，哪些是纯粹受数据驱动的“木偶展示组件” (Dumb/UI Presentational Components)。
-*   **Task 4.3: 统一 Store Schema 结构归一化设计**：提前规划核心 Store 中需存放的树状数据形态，极力主推数据的扁平化 (Normalization) 存储，防范深层嵌套带来的数据比对及更新风暴。
-*   **Task 4.4: UI 样式体系架构设计**：定调原子类 (Tailwind) 方案、CSS-in-JS 或者 CSS Modules 的系统准则。并确立基于 Design Token 的主题定义与 CSS 变量穿透结构。
+*   **Task-FE-4.1: BFF 层与 前端组件树拓扑设计 (强依赖UI设计稿)**：
+    *   **Prerequisites**: Task-FE-3.4 [DONE], Task-UX-6.1 [DONE]
+    *   **Description**: 主导端到端接口对齐，为核心视图绘制 Component Tree 拓扑。强制约定容器组件与展示组件的隔离范式。
+*   **Task-FE-4.3: 统一 Store Schema 与 样式体系架构设计**：
+    *   **Prerequisites**: Task-FE-4.1 [DONE]
+    *   **Description**: 提前规划核心 Store 中需存放的树状数据形态，确立基于 Design Token 的主题定义与 CSS 变量穿透结构。
 
 ### Phase 5: 风险阻断与边界兜底管控 (Risk & Blast Radius Assessment)
 **目标**：防堵灾难性的页面白屏死机、隐私泄漏或不可挽回的生产线事故，赋予“脆弱 Web”以极强的韧性。
