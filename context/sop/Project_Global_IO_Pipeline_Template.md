@@ -33,9 +33,19 @@ graph TD;
     UX_3_3 --> UX_4_2[OUT-UX-4.2: 极致高保真 UI 视觉稿 / UI_UX]
     UX_4_2 --> UX_FINAL[OUT-UX-6.1: 交付视口链接 & Design Tokens / UI_UX]
     
+    %% [前端架构研发分支：Frontend Architect SOP]
+    BOARD --> F_ARCH_1[OUT-F1.x: 前端需求定位与体验红线 / FE_Arch]
+    F_ARCH_1 --> F_ARCH_2[OUT-F2.x: 老旧现状与包体积排查 / FE_Arch]
+    F_ARCH_2 --> F_ARCH_3[OUT-F3.4: 渲染模式与分离解耦 ADR / FE_Arch]
+    %% UI 设计稿是前端架构进入 4.X 详细组件树设计的绝杀入参
+    UX_FINAL ==解除锁死与释放入参==> F_ARCH_4[OUT-F4.x: 树拓扑/状态分流及UI范式 / FE_Arch]
+    F_ARCH_3 --> F_ARCH_4
+    F_ARCH_4 --> F_ARCH_5[OUT-F5.x: 内存防爆与降级拦截网 / FE_Arch]
+    F_ARCH_5 --> F_ARCH_FINAL[OUT-F6.3: CI/CD拦截卡点与哨兵 / FE_Arch]
+
     %% [研发与验收交付汇流]
-    ARCH_FINAL ==> DEV_TEAM((研发工程团队进场实施))
-    UX_FINAL ==> DEV_TEAM
+    ARCH_FINAL ==> DEV_TEAM((后端底座与基础架构工程团队进场))
+    F_ARCH_FINAL ==作为剧烈源头强势阻塞下游==> FE_DEV_TEAM((前端视图与组件重构分队切入代码层))
 ```
 
 ---
@@ -56,4 +66,10 @@ graph TD;
 | `OUT-UX-1.1` | 核心用户画像与关键痛点场景清单 | UI/UX Designer (体验设计师) | `Master_Context_Board`, `EXT-PRD` | UI构思的土壤：`OUT-UX-3.1` 情绪板 |
 | `OUT-UX-3.3` | 主导交互结构、风格定调 ADR | UI/UX Designer (体验设计师) | `OUT-UX-3.1`, `OUT-UX-3.2 (低保真)`| 核心成图依据：`OUT-UX-4.1` 及 `OUT-UX-4.2` |
 | `OUT-UX-4.2` | 核心跑通主线链路的极高保真 UI 稿 | UI/UX Designer (体验设计师) | `OUT-UX-3.3`, `OUT-UX-4.1` | 下游补齐：异常边界与动效、移交 `OUT-UX-6.1` |
-| `OUT-UX-6.1` | 开发视口链接及 Design Tokens / 标注资产 | UI/UX Designer (体验设计师) | `OUT-UX-4.X`, `OUT-UX-5.X` | **阻塞大关：前端研发开始切图与还原 UI** |
+| `OUT-UX-6.1` | 开发视口链接及 Design Tokens / 标注资产 | UI/UX Designer (体验设计师) | `OUT-UX-4.X`, `OUT-UX-5.X` | **受其死死卡住咽喉的下游节点：前端架构 4.X 组件大阵** |
+| `OUT-F1.X` | NFR基准定音、核心交互水域定性与 Mock 判定 | Frontend Architect (前端架构管线) | `Master_Context_Board` | 倒逼压死下游：`OUT-F2.X (包体排雷)`, `OUT-F3.X` |
+| `OUT-F2.X` | 依赖深渊诊断、内存泄露与渲染拓扑时长报告 | Frontend Architect (前端架构管线) | `OUT-F1.X` | 引爆决策：`OUT-F3.4 (渲染与状态 ADR)` |
+| `OUT-F3.4` | 单页/SSR渲染选型、状态域(Zustand)分流 ADR | Frontend Architect (前端架构管线) | `OUT-F2.X`, `OUT-F1.2` | 底层基建依据：`OUT-F4.X (树体系规划)` |
+| `OUT-F4.X` | BFF防腐契约、归一化 Store 结构与 UI 组件树 | Frontend Architect (前端架构管线) | `OUT-F3.4`, `OUT-UX-6.1` | 制约保护：`OUT-F5.X (降级与防爆)` |
+| `OUT-F5.X` | OOM爆存拦截底牌、降级兜底网与 XSS 纵深层 | Frontend Architect (前端架构管线) | `OUT-F4.X` | 交付守门指标：`OUT-F6.X (流水线阈值)` |
+| `OUT-F6.3` | CI/CD 性能卡点防线、错误边界哨兵集群 | Frontend Architect (前端架构管线) | 组装所有 `OUT-F1` ~ `OUT-F5` | ⚠️ **无情切断大关：前端切图仔与交互逻辑研发军团落键死等** |
