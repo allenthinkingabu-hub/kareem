@@ -1,258 +1,395 @@
 # 9-Step Workflow for Task 0.2: Extremes & Redlines Detection
 
-## Step 1: 前置宏观意图摄入与基准盘点 (Prerequisite Context Intake)
-
-**⚠️ 系统特例铁律**: Task 0.2 必须 100% 架构在 Task 0.1 的产出之上！
-
-**Actions**:
-- **强制读取** `3_final_outputs/OUT-0.1_Core_Business_Intent.md`
-- 提取商业驱动力矩阵中的 P0/P1 优先级项
-- 提取受众规模与挑战评级
-- 如果 OUT-0.1 不存在，立即中止并要求先完成 Task 0.1
-
-**Output**: 基准上下文清单，记录在 `2_agent_workspaces/task-0.2-extremes-intake/phases/context_baseline.md`
+> **Before EVERY step**: Update `.task_state.md` to `[IN_PROGRESS]`, print the Mental Ignition Log (Steps 4+: read `required_skills.yaml` first), execute, persist outputs, update to `[DONE]`, then emit the 🛑 Hard Stop.
 
 ---
 
-## Step 2: 动态技术/技能装配 (Dynamic Skill Assembly)
+## Step 1: 前置宏观意图摄入与基准盘点
 
-**Purpose**: 推导本次极值探底需要用到哪几项特定的推演模型
-
-**Required Skills**:
-- 容量极值换算公式 (QPS/TPS/DAU 换算)
-- 带宽与存储增长曲线推演
-- 等保安全级别反推模型
-- 高可用性 (HA) 容灾计算
-- 成本与性能权衡分析
+**Purpose**: Establish the baseline from Task 0.1 so all extreme value calculations are grounded in agreed commercial context and audience scale.
 
 **Actions**:
-- 基于 OUT-0.1 的业务规模识别所需推演技能
-- 强制落盘写成 `required_skills.yaml` 供自身遵守
+- Read `3_final_outputs/OUT-0.1_Core_Business_Intent.md`
+- Extract: business drivers, audience scale, cost sensitivity, anti-goals
+- Note: extreme value interrogation must be 100% anchored to the commercial and financial tone already agreed in 0.1
+- If OUT-0.1 does not exist, HALT and warn client
+
+**Output**: `2_agent_workspaces/task-0.2-extremes-intake/phases/context_baseline.md`
+
+```markdown
+# Context Baseline from OUT-0.1
+- Business Domain: [e.g., fintech payment, e-commerce flash sale]
+- Audience Scale: [DAU / MAU peak numbers]
+- Cost Sensitivity: [budget-constrained vs. performance-first]
+- Key Anti-Goals: [from 0.1 out-of-scope section]
+- Implications for Extreme Value Analysis: [what this means for QPS targets, HA tiers, etc.]
+```
+
+**State Update**: Set Step 1 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 1 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
+
+---
+
+## Step 2: 动态专属专家角色与技能装配
+
+**Purpose**: Define the exact expert persona this agent must embody for Steps 4–9. This soul-binding determines the quality of extreme interrogation.
+
+**⚠️ CRITICAL**: The output of this step powers all subsequent steps. Without a loaded expert persona, extreme value calculations are worthless.
+
+**Actions**:
+- Based on the domain from Step 1, determine:
+  - What seniority of HA/security architect is needed?
+  - Which capacity calculation models are required (e.g., Little's Law, Amdahl's Law, queueing theory)?
+  - Which compliance frameworks are relevant (等保二/三级, GDPR, PCI-DSS, HIPAA)?
+  - What high-concurrency failure patterns must be understood?
+- Write `required_skills.yaml` with full expert definition
 
 **Output**: `2_agent_workspaces/task-0.2-extremes-intake/config/required_skills.yaml`
 
+```yaml
+# Required Expert Skills for Task 0.2
+
+role:
+  title: "资深高可用与安全架构专家"
+  seniority: "10+ years distributed systems, has designed for 1M+ concurrent users"
+  domain_focus: "[e.g., financial payment systems / e-commerce peak traffic]"
+
+capacity_models:
+  - name: "QPS/TPS Calculation"
+    formula: "QPS = DAU × avg_actions_per_day / 86400 × peak_multiplier"
+    peak_multiplier: "typically 3x–10x for flash sales, 2x for normal peaks"
+  - name: "Bandwidth Estimation"
+    formula: "BW = QPS × avg_payload_kb × 1.2 (overhead)"
+  - name: "Storage Growth Rate"
+    formula: "daily_growth_GB = DAU × events_per_user × avg_event_size_bytes / 1e9"
+
+ha_tiers:
+  - tier: "99.9%"
+    downtime_per_month: "43 minutes"
+    architecture: "single-region active-active, async replication"
+  - tier: "99.95%"
+    downtime_per_month: "22 minutes"
+    architecture: "single-region active-active, sync replication"
+  - tier: "99.99%"
+    downtime_per_month: "4.3 minutes"
+    architecture: "multi-region active-active, synchronous global replication"
+
+compliance_knowledge:
+  - framework: "等保三级"
+    key_requirements: "国密算法 SM2/SM4, full audit logs, 7×24 security monitoring"
+    consequence_if_missed: "license revocation, criminal liability"
+  - framework: "等保二级"
+    key_requirements: "basic access control, user activity logs"
+    consequence_if_missed: "regulatory warning, temporary suspension"
+
+failure_patterns:
+  - "Thundering herd: cache stampede when cold-starting"
+  - "Single point of failure in message queue broker"
+  - "Database connection pool exhaustion at peak"
+  - "DNS TTL cascade during datacenter failover"
+```
+
+**State Update**: Set Step 2 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 2 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
+
 ---
 
-## Step 3: 动态兵器/工具装配 (Dynamic Tool Assembly)
+## Step 3: 动态兵器/工具装配
 
-**Purpose**: 推导所需 MCP 工具或检索武器
-
-**Required Tools**:
-- 全网搜索 (行业极限标准查询)
-- 企业知识库检索 (竞品容灾阈值)
-- 技术文档查询 (等保/审计标准)
-- 计算器/公式推演工具
+**Purpose**: Identify which research and search tools are needed for extreme value benchmarking.
 
 **Actions**:
-- 识别需要的工具
-- 存底 `required_tools.yaml`
-- 验证工具可用性
+- Based on domain, identify required tools
+- Write `required_tools.yaml` as the approved tool whitelist
 
 **Output**: `2_agent_workspaces/task-0.2-extremes-intake/config/required_tools.yaml`
 
+```yaml
+# Approved Tool Whitelist for Task 0.2
+
+web_search:
+  allowed: true
+  quality_constraints:
+    - "Must be from: major cloud vendors (AWS, GCP, Azure), large enterprises (Alibaba, Tencent, Netflix), academic papers, official compliance bodies"
+    - "FORBIDDEN: content farms, outdated blogs (> 3 years), anonymous sources"
+    - "Required: publication date within last 3 years for performance benchmarks"
+
+reference_sources:
+  - "AWS Architecture Blog / GCP Solutions / Azure Architecture Center"
+  - "Alibaba Cloud / Tencent Cloud technical blogs (for 等保 compliance)"
+  - "NIST, PCI Security Standards Council (for compliance)"
+  - "High Scalability blog (verified case studies only)"
+
+file_read:
+  allowed: true
+  allowed_paths:
+    - "3_final_outputs/OUT-0.1_Core_Business_Intent.md"
+    - "architect/doc/OUT-0.2_Template.md"
+    - "context/sop/"
+    - "2_agent_workspaces/task-0.2-extremes-intake/"
+
+file_write:
+  allowed: true
+  allowed_paths:
+    - "2_agent_workspaces/task-0.2-extremes-intake/"
+    - "1_shared_context/meeting_records/Task0.2_Extremes_QA_Log.md"
+    - "3_final_outputs/"
+```
+
+**State Update**: Set Step 3 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 3 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
+
 ---
 
-## Step 4: 行业极端标准与红线防盲盒预研 (Industry Extremes & Redlines Research)
+## Step 4: 透明化极端预研与双轨记录制
 
-**Purpose**: 找遍该领域的同类竞品"最底线容灾阈值"、"等保/审计死线"与"最高可用性天花板"
+**Purpose**: Research industry extreme values and redline benchmarks. Eliminate black-box research through transparent dual-track logging.
 
-**Research Areas**:
-- **行业容量标准**: 同类系统的 QPS/TPS 极限案例
-- **等保/合规红线**: 该行业的法务与安全死线 (如金融等保三级)
-- **高可用性天花板**: 竞品的 SLA 承诺与实际容灾能力
-- **成本陷阱**: 该领域常见的性能-成本失衡案例
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-**Actions**:
-- 使用工具查询行业标准文档
-- 分析竞品的技术博客/事故复盘
-- 识别该领域的"不可能三角"权衡点
-- 存底稿启发自己的认知边界
+**Phase A — Propose Research Scope (HARD STOP FOR APPROVAL)**:
+- List planned research directions and keywords
+- Present to client: "我要去查这些方向，您看是否需要删减或补充？"
+- **WAIT for client approval before executing any searches**
 
-**Output**: `2_agent_workspaces/task-0.2-extremes-intake/phases/industry_extremes_research.md`
+**Phase B — Execute Research (After Approval)**:
+- Only search approved directions
+- Only cite enterprise/authoritative/recent sources
+- Reject any source that is a content farm or older than 3 years for perf benchmarks
+
+**Phase C — Dual-Track Output**:
+
+Track 1 — Research Conclusion (to inspire Steps 5 & 6):
+`2_agent_workspaces/task-0.2-extremes-intake/phases/research_conclusion.md`
+
+```markdown
+# Industry Extremes Research Conclusion
+## Domain Benchmarks
+- Typical QPS range for [domain]: [e.g., 1K–50K TPS for payment]
+- HA tier industry standard: [e.g., 99.95% for financial apps]
+- Compliance mandatory: [e.g., 等保三级 for financial, GDPR for EU users]
+## Redline Patterns
+- [Key legal/security patterns found]
+## Surprising Findings
+- [Anything that contradicts common assumptions]
+```
+
+Track 2 — Research Trace Log (for auditability and hallucination prevention):
+`2_agent_workspaces/task-0.2-extremes-intake/Research_Trace_Log.md`
+
+```markdown
+# Research Trace Log — Task 0.2
+| URL | Source Quality | Kept? | Reason for Decision |
+|---|---|---|---|
+| [URL] | [AWS Blog / random blog] | ✅/❌ | [Why kept or rejected] |
+```
+
+**State Update**: Set Step 4 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 4 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 5: 沉浸式灵魂拷问问卷对齐 (Killer Questionnaire Design)
+## Step 5: 沉浸式灵魂拷问问卷对齐
 
-**Purpose**: 拿着行业的红线真经，结合 `OUT-0.2_Template.md`，生成具备极度"杀伤力"的闭环约束问卷
+**Purpose**: Design a lethal questionnaire that forces quantification of all extreme values. Based on `OUT-0.2_Template.md` structure combined with industry benchmarks from Step 4.
 
-**Key Questions to Address**:
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-### 容量极值拷问
-- **峰值并发**: "双十一/大考/抢票"等极端场景下的 QPS/TPS 是多少？
-- **数据增长**: 每日/每月的数据增量？多久会达到存储上限？
-- **用户规模**: DAU/MAU 的天花板？增长曲线？
-
-### 可用性与容灾拷问
-- **可接受的宕机时间**: RTO (恢复时间目标) 是多少？30秒？5分钟？30分钟？
-- **数据丢失容忍度**: RPO (恢复点目标) 是多少？可以丢失多少数据？
-- **异地容灾**: 需要同城双活？异地多活？还是单机房即可？
-
-### 法务与安全红线拷问
-- **等保要求**: 是否需要通过等保二级/三级？
-- **数据合规**: 是否涉及个人隐私数据？GDPR/CCPA 合规？
-- **审计要求**: 是否需要完整的操作审计日志？保留多久？
-
-### 时间与资金死线拷问
-- **上线死线**: 必须在什么时间点前上线？有无商业窗口期？
-- **预算上限**: 基础设施预算是多少？能接受的运维成本？
-- **技术债容忍度**: 为了赶时间，可以接受多少技术债？
-
-### 兼容性与遗留系统拷问
-- **浏览器兼容**: 是否需要兼容 IE11/老版本 Safari？
-- **老系统对接**: 是否需要对接遗留系统？有什么技术栈限制？
-- **向后兼容**: 是否需要支持老版本 API/数据格式？
-
-**Actions**:
-- 基于 `OUT-0.2_Template.md` 的结构设计问卷
-- 针对每个模板章节准备 3-5 个深度问题
-- 准备追问策略：绝不接受"尽量快"、"永远好用"等伪命题
-- 强制量化：将所有模糊词转化为具体数字
+**Rules**:
+- NO questions about UI styling, feature design, or button colors
+- EVERY question targets: throughput bottleneck parameters, time constraints, legal death lines
+- Include forcing functions: binary choices, cliff-edge scenarios, budget cuts
 
 **Output**: `2_agent_workspaces/task-0.2-extremes-intake/phases/extremes_questionnaire.md`
 
+**Sample Questionnaire Structure**:
+
+```markdown
+# Extremes Interrogation Questionnaire
+
+## Section 1: Traffic & Capacity Extremes
+Q1: 描述您最极端的峰值场景（如双十一、考试季、抢票）。在该场景下，预期同时在线用户数与 QPS 是多少？
+Q2: 如果峰值流量突然变为正常的 10 倍，系统应该优雅降级还是允许崩溃？崩溃代价是多少？
+Q3: 基础设施预算是多少？这直接限定了您的 QPS 天花板。
+
+## Section 2: High Availability & Disaster Recovery
+Q4: 每月最多允许多少分钟的计划外停机？（选一个：5分钟 / 30分钟 / 4小时）
+Q5: 灾难发生后，恢复时间目标（RTO）是多少？数据丢失容忍度（RPO）是多少？
+Q6: 是否要求异地多活？了解到实现代价是现有架构成本的 3–5 倍后，您是否坚持？
+
+## Section 3: Legal & Security Redlines
+Q7: 需要通过哪个等保级别？如果未能通过，会面临哪些监管后果？
+Q8: 是否涉及金融数据、医疗数据、或 PII？需要哪些加密标准？
+Q9: 审计日志必须保留多久？由谁可以访问？
+
+## Section 4: Timeline & Budget Constraints
+Q10: 硬性上线死线是什么时间？为什么这个日期不可更改？
+Q11: 如果预算削减 50%，最低可用系统是什么样的？
+Q12: 是否有任何遗留系统（如 IE11 支持、旧版 API）必须兼容？违反这些约束的代价是什么？
+```
+
+**State Update**: Set Step 5 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 5 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
+
 ---
 
-## Step 6: 客户切片极地访谈与实录入库 (Client Interrogation & Recording)
+## Step 6: 基于专属问卷的访谈实录与专业纠偏指导
 
-**Purpose**: 向客户发起激烈逼问交互，绝不妥协模糊答案
+**Purpose**: Execute the client interrogation using Step 5's questionnaire. Document findings AND provide architect-grade tradeoff guidance when contradictions emerge.
 
-**⚠️ 绝对禁止**: 将几万字的会话聊天记录丢在私有沙盒里！
+**⚠️ MANDATORY**: 
+1. Read `required_skills.yaml` before starting and print Mental Ignition Log
+2. **MUST load Step 5 questionnaire as the interview master outline**
 
-**Interrogation Tactics**:
-- **二选一逼问法**: "是要性能还是要成本？不能都要。"
-- **极端场景压测**: "如果双十一流量是平时的 100 倍，系统会怎样？"
-- **资金悬崖倒逼**: "如果预算只有一半，你会砍掉哪些功能？"
-- **时间死线倒推**: "如果必须提前一个月上线，你能接受什么妥协？"
+**Interrogation Rules**:
+- Use the questionnaire as the forcing framework — do not deviate into feature discussions
+- When client provides a vague answer ("as fast as possible"), push back with quantified options
+- **When detecting logical contradictions** (e.g., "最高等保 + 最低成本"), immediately invoke architect expertise:
+  - State the contradiction explicitly
+  - Present real industry cost data
+  - Offer concrete downgrade/compromise options (e.g., "等保二级 + enhanced monitoring saves 40% cost")
+  - Force a documented tradeoff decision
+- Never record a pseudo-requirement like "尽量快" or "永远在线" — demand a number
 
-**Recording Requirements**:
-- 记录客户的原话，尤其是犹豫、矛盾、情绪化的表达
-- 标注客户的优先级排序过程
-- 捕捉隐藏的假设和未明说的约束
-- **强制落盘至项目共同可见的目录**
+**⚠️ ABSOLUTE PROHIBITION**: Never leave the Q&A records in private workspace.
 
 **Output**: `1_shared_context/meeting_records/Task0.2_Extremes_QA_Log.md`
 
-**Format**:
 ```markdown
-# Task 0.2 Extremes & Redlines Interview Log
-
+# Task 0.2 Extremes Interview Log
 **Date**: YYYY-MM-DD
 **Participants**: [List]
-**Duration**: [Time]
 
-## Section 1: 容量极值拷问
-
-### Q1: 峰值并发场景
-**Question**: [Question Text]
+## Q1: [Question text]
 **Client Response**: [Verbatim]
-**Hesitation/Contradiction**: [Notes]
-**Quantified Result**: [Extracted Number/Constraint]
+**Architect Analysis**: [Your interpretation and concerns]
+**Tradeoff Guidance Issued** (if applicable): [What contradiction was identified and what compromise was proposed]
+**Final Client Decision**: [The agreed quantified constraint]
 
-### Q2: 数据增长曲线
-...
+## Q2: ...
 
-## Section 2: 可用性与容灾拷问
-...
-
-## Section 3: 法务与安全红线拷问
-...
-
-## Section 4: 时间与资金死线拷问
-...
-
-## Section 5: 兼容性与遗留系统拷问
-...
-
-## Final Priority Matrix
-[客户最终确认的优先级排序]
+## Contradiction Resolution Records
+| Contradiction Detected | Industry Reality | Compromise Options Offered | Client Decision |
+|---|---|---|---|
+| "要最高等保又要省钱" | 等保三级成本比二级高 200% | 降级至二级 + 加强监控 | [Client choice] |
 ```
 
+**State Update**: Set Step 6 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 6 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
+
 ---
 
-## Step 7: 模版动态进化与强制拦截对齐 (Template Evolution & Client Sign-off)
+## Step 7: 模版动态进化与强制拦截对齐
 
-**Purpose**: 结合逼问出的真实业务容忍度，衍生定制化升级原有底层极值模版
+**Purpose**: Based on real interrogation outputs, evolve the base template into a customized version reflecting the client's specific capacity tolerance and financial cliffs. Then FORCE client sign-off.
+
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
 **Actions**:
-- 基于客户的实际约束，定制化 `OUT-0.2_Template.md`
-- 如果发现客户资金极度受限，添加"成本优化"章节
-- 如果发现法务红线极其严格，添加"合规检查清单"章节
-- 生成 `templates/OUT-0.2_Template_Custom.md`
+- Identify template sections that need customization based on interview findings
+  - e.g., if client is budget-constrained, expand the "Financial Compromise" column with more detail
+  - e.g., if client is in healthcare, add a HIPAA-specific redline section
+- Generate `OUT-0.2_Template_Custom.md`
+- Present summary to client: "根据您的情况，逼出来的水线结论与代价卡点如下..."
+- **HARD STOP: Do NOT proceed until client explicitly approves the custom template**
 
-**Client Validation**:
-- 向客户汇报被逼出来的水线结论与代价卡点
-- 明确告知：如果选择 X，就必须放弃 Y
-- **强制等待客户同意签字授权并定案后才能继续**
-- 记录客户的最终决策和妥协点
+**Output**: `2_agent_workspaces/task-0.2-extremes-intake/templates/OUT-0.2_Template_Custom.md`
 
-**Output**: 
-- `2_agent_workspaces/task-0.2-extremes-intake/templates/OUT-0.2_Template_Custom.md`
-- `2_agent_workspaces/task-0.2-extremes-intake/phases/client_validation.md`
+Also write: `2_agent_workspaces/task-0.2-extremes-intake/phases/client_validation.md`
+```markdown
+# Client Validation Record — Step 7
+**Date**: YYYY-MM-DD
+**Template Version Presented**: OUT-0.2_Template_Custom.md v1
+**Client Approval Status**: [APPROVED / REVISION REQUESTED]
+**Revision Notes**: [If any]
+**Sign-off Confirmation**: [Client's exact confirmation statement]
+```
+
+**State Update**: Set Step 7 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 7 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 8: 双轨纯血成文制图与交付分发 (Final Documentation & Diagram)
+## Step 8: 双轨纯血成文制图与交付分发
 
-**Purpose**: 依循客户审批通过的 Custom 模版进行最终编档
+**Purpose**: Using the client-approved custom template, produce the final OUT-0.2 document and topology diagrams. Strip all conversational waste — deliver only ice-cold data constants.
 
-**Documentation Requirements**:
-- 剥离一切聊天废料，提纯出冰冷、极致的数据常量资产
-- 每个极值必须有明确的数字或可验证的标准
-- 每个红线必须有明确的违反后果
-- 每个妥协点必须有明确的权衡逻辑
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-**Diagram Requirements**:
-- 使用 Mermaid 代码块绘制"极值水位线拓扑图"
-- 导出 `.drawio` 图形文件
-- 图示必须包含：
-  - 容量极值的层级关系 (DAU → QPS → 带宽 → 存储)
-  - 红线的触发条件和后果
-  - 妥协点的权衡逻辑
+**⚠️ SUPREME ORDER**: The final OUT-0.2 must NOT remain in the private workspace.
+
+**Actions**:
+- Fill all sections of `OUT-0.2_Template_Custom.md` with quantified, validated data
+- Generate a Mermaid capacity/topology diagram in a code block showing:
+  - Peak traffic flow
+  - HA tier boundaries
+  - Data tiering (hot/cold)
+  - Redline enforcement points
+- Export the same diagram as `.drawio` file
 
 **Output**:
-- `3_final_outputs/OUT-0.2_[Topic]_Extremes_Redlines.md`
+- `3_final_outputs/OUT-0.2_[Topic]_Extremes_Redlines.md` — final delivery document
 - `3_final_outputs/diagrams/OUT-0.2_Extremes_Topology.drawio`
-- `3_final_outputs/diagrams/OUT-0.2_Extremes_Topology.png` (exported)
+- `3_final_outputs/diagrams/OUT-0.2_Extremes_Topology.png`
+
+**Quality Gates Before Marking Done**:
+- [ ] Zero vague terms ("尽量快", "尽量多") in the entire document
+- [ ] Every NFR has: peak dream target, architecture feasibility limit, financial compromise point
+- [ ] Every redline has: exact constraint, catastrophic consequence if violated
+- [ ] Mermaid diagram renders without errors
+- [ ] .drawio file exists alongside the Mermaid embed
+
+**State Update**: Set Step 8 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 8 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 9: 全局 SOP 资产反写与结印交付闭环 (SOP Asset Writeback & Handoff)
+## Step 9: 全局 SOP 资产反写与结印交付闭环
 
-**Purpose**: 固化新增维度，并将 OUT-0.1 和 OUT-0.2 打包交付给 Task 0.3
+**Purpose**: Final duty — update global SOP assets, then issue the handoff package to Task 0.3.
 
-**SOP Writeback**:
-- 更新 `Architect SOP.md`，记录 Task 0.2 的执行经验
-- 更新 `Project_Global_IO_Pipeline_Template.md`，添加极值维度
-- 如果发现新的行业红线模式，添加到知识库
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-**Handoff Checklist**:
-- 创建 `3_final_outputs/Task_0.2_Handoff_Checklist.md`
-- 列出 Task 0.3 需要的所有输入：
-  - OUT-0.1 (Core Business Intent)
-  - OUT-0.2 (Extremes & Redlines)
-  - 会议记录 (Task 0.1 + Task 0.2)
-- 标注关键的极值和红线，提醒 Task 0.3 必须写入 Master Context Board
+**Actions**:
 
-**Output**:
-- Updated `Architect SOP.md`
-- Updated `Project_Global_IO_Pipeline_Template.md`
-- `3_final_outputs/Task_0.2_Handoff_Checklist.md`
+Part A — Global Asset Update:
+- Update `context/sop/Project_Global_IO_Pipeline_Template.md` to reflect Task 0.2's new output nodes
+- Update `context/sop/Architect SOP.md` to solidify any new dimensions discovered during this task
 
----
+Part B — Handoff Package for Task 0.3:
+- Create `3_final_outputs/Task_0.2_Handoff_Checklist.md`
+- Issue a mandatory directive: pack OUT-0.1 + OUT-0.2 together as the initialization payload for Task 0.3 (Master Context Board initialization)
 
-## Workflow Completion Checklist
+```markdown
+# Task 0.2 Handoff Checklist
 
-Before marking Task 0.2 as complete, verify:
+## Deliverables Confirmed
+- [ ] `1_shared_context/meeting_records/Task0.2_Extremes_QA_Log.md`
+- [ ] `3_final_outputs/OUT-0.2_[Topic]_Extremes_Redlines.md`
+- [ ] `3_final_outputs/diagrams/OUT-0.2_Extremes_Topology.drawio`
 
-- [ ] Step 1: OUT-0.1 已读取并提取基准上下文
-- [ ] Step 2: `config/required_skills.yaml` 已创建
-- [ ] Step 3: `config/required_tools.yaml` 已创建
-- [ ] Step 4: `phases/industry_extremes_research.md` 已完成
-- [ ] Step 5: `phases/extremes_questionnaire.md` 已设计
-- [ ] Step 6: `1_shared_context/meeting_records/Task0.2_Extremes_QA_Log.md` 已记录
-- [ ] Step 7: `templates/OUT-0.2_Template_Custom.md` 已创建并获客户签字
-- [ ] Step 8: `3_final_outputs/OUT-0.2_[Topic]_Extremes_Redlines.md` 已交付
-- [ ] Step 8: `3_final_outputs/diagrams/OUT-0.2_Extremes_Topology.drawio` 已创建
-- [ ] Step 9: `3_final_outputs/Task_0.2_Handoff_Checklist.md` 已创建
-- [ ] Step 9: SOP 资产已反写
+## Downstream Dependencies
+- **Task 0.3**: Must receive BOTH OUT-0.1 AND OUT-0.2 to initialize Master_Context_Board.md
+  - NFR extreme values → populate Section 2 of Master Context Board
+  - Redlines → populate the compliance/constraint section
+- **Task 3.1 (Backend Architecture)**: QPS/TPS extremes will force Redis distributed locks + MQ queue buffering
+- **Task 4.1 (Component Design)**: Security redlines will circuit-break any non-compliant package or client-side data storage
+
+## Phase 0 Declaration
+Phase 0 is approaching closure. OUT-0.1 (Business Intent) + OUT-0.2 (Extremes & Redlines) together form the complete foundational payload for initializing the Master Context Board. Forward to Task 0.3 now.
+
+## Handoff Date
+YYYY-MM-DD
+```
+
+**State Update**: Set Step 9 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 9 已就绪！Task 0.2 全部完成，等待人类长官确认交棒 Task 0.3]`

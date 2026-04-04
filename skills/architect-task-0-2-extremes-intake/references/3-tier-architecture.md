@@ -1,182 +1,124 @@
-# 3-Tier Architecture for Task 0.2: Extremes Intake
+# 3-Tier Architecture: Workspace Isolation Rules
 
 ## Overview
 
-Task 0.2 operates within a strict 3-tier workspace isolation model to ensure proper information flow and prevent data silos.
+Task 0.2 执行期必须严格遵守三层空间隔离法物理脚手架。**若逾越，系统将立即阻断。**
 
 ```
 project-root/
-├── 1_shared_context/          # Global shared zone - Engine brain
-│   ├── meeting_records/       # ✅ Task 0.2 WRITES here
-│   │   └── Task0.2_Extremes_QA_Log.md
-│   └── Master_Context_Board.md  # ⚠️ Does NOT exist yet (created by Task 0.3)
+├── 1_shared_context/                      # 全局绝对共享区
+│   ├── meeting_records/                   # 客户访谈录音和会议记录
+│   │   └── Task0.2_Extremes_QA_Log.md    # 极值逼问实录 (必须在此)
+│   ├── requirements/                      # 需求文档
+│   └── Master_Context_Board.md            # (由 Task 0.3 创建)
 │
-├── 2_agent_workspaces/        # Private sandbox zone
-│   └── task-0.2-extremes-intake/  # ✅ Task 0.2's private workspace
-│       ├── config/
-│       │   ├── required_skills.yaml
-│       │   └── required_tools.yaml
-│       ├── templates/
+├── 2_agent_workspaces/                    # 私有沙盒执行区
+│   └── task-0.2-extremes-intake/          # Task 0.2 专属工作区
+│       ├── .task_state.md                 # 持久化状态底稿 (首要读取)
+│       ├── config/                        # 配置文件
+│       │   ├── required_skills.yaml       # 专家角色与技能档案
+│       │   └── required_tools.yaml        # 工具白名单
+│       ├── templates/                     # 定制化模板
 │       │   └── OUT-0.2_Template_Custom.md
-│       └── phases/
-│           ├── context_baseline.md
-│           ├── industry_extremes_research.md
-│           ├── extremes_questionnaire.md
-│           └── client_validation.md
+│       ├── phases/                        # 阶段性工作产物 (推演草稿)
+│       │   ├── context_baseline.md        # 从 OUT-0.1 提炼的基准盘点
+│       │   ├── research_conclusion.md     # 行业极值调研结论
+│       │   ├── extremes_questionnaire.md  # 灵魂拷问问卷
+│       │   └── client_validation.md       # 客户签字确认记录
+│       └── Research_Trace_Log.md          # 双轨调研溯源日志
 │
-└── 3_final_outputs/           # Final deliverables zone
-    ├── OUT-0.1_Core_Business_Intent.md  # ⚠️ READ ONLY (from Task 0.1)
-    ├── OUT-0.2_[Topic]_Extremes_Redlines.md  # ✅ Task 0.2 WRITES here
-    ├── Task_0.2_Handoff_Checklist.md  # ✅ Task 0.2 WRITES here
+└── 3_final_outputs/                       # 全服结算交付区
+    ├── OUT-0.1_Core_Business_Intent.md    # (由 Task 0.1 生成)
+    ├── OUT-0.2_[Topic]_Extremes_Redlines.md  # Task 0.2 最终交付
+    ├── Task_0.2_Handoff_Checklist.md
     └── diagrams/
         ├── OUT-0.2_Extremes_Topology.drawio
         └── OUT-0.2_Extremes_Topology.png
 ```
 
-## Tier 1: 1_shared_context/ (Global Shared Zone)
+---
 
-**Purpose**: Information that ALL agents need to access
+## Tier 1: 1_shared_context/ (全局绝对共享区 — 引擎大脑)
+
+**Purpose**: 存储所有 Agent 都需要访问的共享知识、原始访谈记录和全局上下文
 
 **Task 0.2 Responsibilities**:
-- ✅ **WRITE**: `meeting_records/Task0.2_Extremes_QA_Log.md`
-  - Store complete client interview logs
-  - Record all extreme value negotiations
-  - Capture client's priority decisions and compromises
+- 将极值逼问的全部 Q&A 实录（含权衡纠偏记录）写入 `meeting_records/Task0.2_Extremes_QA_Log.md`
+- 这是第一批史料填充任务 — 客户说的每一句话、每一个矛盾诉求都必须在此存档
 
 **Access Rules**:
-- All agents can READ
-- Only Task 0.2 writes its meeting records
-- This is the ONLY place for client conversation logs
-
-**⚠️ Critical Rule**: 
-**NEVER** store client interview logs in your private workspace (`2_agent_workspaces/`). They MUST go to `1_shared_context/meeting_records/` so downstream agents can access them.
+- ✅ 所有 Agent 可读
+- ✅ Task 0.2 可写入 `meeting_records/`
+- ❌ 不得存放临时工作文件或推演草稿
+- ❌ 不得存放未经客户确认的内容
 
 ---
 
-## Tier 2: 2_agent_workspaces/task-0.2-extremes-intake/ (Private Sandbox)
+## Tier 2: 2_agent_workspaces/ (私有沙盒执行区 — 秘密推演打稿区)
 
-**Purpose**: Task 0.2's private working area for drafts, calculations, and intermediate artifacts
-
-**Directory Structure**:
-
-### config/
-Configuration files that guide Task 0.2's execution:
-- `required_skills.yaml`: List of analysis skills needed (capacity calculation, HA modeling, etc.)
-- `required_tools.yaml`: List of tools needed (web search, industry reports, etc.)
-
-### templates/
-Custom templates evolved from base templates:
-- `OUT-0.2_Template_Custom.md`: Customized output template based on client's specific constraints
-
-### phases/
-Intermediate work products for each workflow phase:
-- `context_baseline.md`: Extracted context from OUT-0.1
-- `industry_extremes_research.md`: Industry standards and competitor analysis
-- `extremes_questionnaire.md`: Designed questionnaire for client interrogation
-- `client_validation.md`: Client sign-off and validation records
-
-**Access Rules**:
-- Only Task 0.2 can access this workspace
-- Other agents CANNOT read these files
-- These are working drafts, NOT final deliverables
+**Purpose**: Task 0.2 的专属工作区，存放过程性、实验性、待验证的工作产物
 
 **What Goes Here**:
-- ✅ Calculation worksheets (QPS → bandwidth → storage conversions)
-- ✅ Industry research notes
-- ✅ Draft questionnaires
-- ✅ Custom template variations
-- ❌ Client interview logs (those go to `1_shared_context/`)
-- ❌ Final deliverables (those go to `3_final_outputs/`)
-
----
-
-## Tier 3: 3_final_outputs/ (Final Deliverables Zone)
-
-**Purpose**: Validated, production-ready outputs that downstream agents consume
-
-**Task 0.2 Responsibilities**:
-- ✅ **WRITE**: `OUT-0.2_[Topic]_Extremes_Redlines.md`
-  - Final extreme values matrix
-  - Legal and security redlines
-  - Compromise decisions
-- ✅ **WRITE**: `Task_0.2_Handoff_Checklist.md`
-  - Handoff package for Task 0.3
-  - Key highlights and warnings
-- ✅ **WRITE**: `diagrams/OUT-0.2_Extremes_Topology.drawio`
-  - Visual representation of extreme values and redlines
-- ✅ **READ**: `OUT-0.1_Core_Business_Intent.md`
-  - Input from Task 0.1 (read-only)
+- `.task_state.md` — 状态打卡文件（首次激活即创建并维护）
+- `config/` — skills.yaml、tools.yaml（专家人设与工具白名单）
+- `templates/` — 定制化模板（客户确认前存放于此）
+- `phases/` — 推演草稿：基准盘点、调研结论、问卷、验证记录
+- `Research_Trace_Log.md` — 搜索了哪些 URL、为何抛弃某些结果的溯源日志
 
 **Access Rules**:
-- All agents can READ
-- Only the owning agent WRITES its outputs
-- These are immutable once validated by client
+- ✅ Task 0.2 Agent 完全控制
+- ❌ 其他 Agent 不得访问此沙盒
+- ❌ 推演草稿不对外暴露
+- ⚠️ 此沙盒内容不保证长期保留
+
+**What Does NOT Go Here**:
+- 客户访谈记录 → 必须在 `1_shared_context/meeting_records/`
+- 最终交付文档 → 必须在 `3_final_outputs/`
+
+---
+
+## Tier 3: 3_final_outputs/ (全服结算交付区 — 对外蓝图区)
+
+**Purpose**: 存放经过客户确认、极尽纯血的最终交付物，供下游所有 Task 读取
+
+**Task 0.2 Deliverables**:
+- `OUT-0.2_[Topic]_Extremes_Redlines.md` — 最终极值与红线文档
+- `diagrams/OUT-0.2_Extremes_Topology.drawio` — 容量拓扑图源文件
+- `diagrams/OUT-0.2_Extremes_Topology.png` — 导出可视化
+- `Task_0.2_Handoff_Checklist.md` — 交棒 Task 0.3 的清单
+
+**Access Rules**:
+- ✅ 所有 Agent 可读
+- ✅ Task 0.2 写入最终交付物
+- ❌ 不得存放草稿或未验证内容
+- ❌ 不得存放推演过程文件
 
 **Quality Standards**:
-- Must be client-validated before writing here
-- Must follow the approved custom template
-- Must contain only pure, actionable data (no chat logs or draft notes)
-- Must include quantified values, not vague statements
+- 所有数字必须经过客户确认
+- 零容忍模糊词汇
+- Mermaid 图与 .drawio 文件必须同时存在
+- 必须包含下游依赖说明
 
 ---
 
-## Information Flow Rules
+## Violation Consequences
 
-### Reading Rules
-1. **Always read OUT-0.1 first** (from `3_final_outputs/`)
-2. **Never assume** Master Context Board exists (it's created by Task 0.3)
-3. **Check file existence** before reading
+**如果违反三层隔离规则**:
+- 系统立即阻断操作
+- 需重新组织文件结构后方可继续
+- 可能导致下游 Task（尤其是 Task 0.3）无法正确读取依赖
 
-### Writing Rules
-1. **Client interview logs** → `1_shared_context/meeting_records/`
-2. **Working drafts** → `2_agent_workspaces/task-0.2-extremes-intake/`
-3. **Final deliverables** → `3_final_outputs/`
-
-### Handoff Rules
-1. **Task 0.1 → Task 0.2**: Read `OUT-0.1` from `3_final_outputs/`
-2. **Task 0.2 → Task 0.3**: Write handoff checklist to `3_final_outputs/`
-3. **Task 0.3**: Reads both `OUT-0.1` and `OUT-0.2` to initialize Master Context Board
+**Common Violations to Avoid**:
+- ❌ 将客户访谈记录存在 `2_agent_workspaces/` → 应在 `1_shared_context/meeting_records/`
+- ❌ 将最终 OUT-0.2 存在 `2_agent_workspaces/` → 应在 `3_final_outputs/`
+- ❌ 将临时草稿存在 `3_final_outputs/` → 应在 `2_agent_workspaces/phases/`
+- ❌ 跨 Agent 访问其他 Agent 的 workspace
 
 ---
 
-## Common Pitfalls
+## File Movement Protocol
 
-❌ **Storing interview logs in private workspace**
-- Logs MUST go to `1_shared_context/meeting_records/`
-- Downstream agents need access to client's exact words
-
-❌ **Writing final outputs to private workspace**
-- Final `OUT-0.2` MUST go to `3_final_outputs/`
-- Task 0.3 cannot access your private workspace
-
-❌ **Assuming Master Context Board exists**
-- It doesn't exist yet during Task 0.2
-- Task 0.3 creates it using OUT-0.1 and OUT-0.2
-
-❌ **Mixing draft notes with final deliverables**
-- Keep calculations and research in `2_agent_workspaces/`
-- Only pure, validated data goes to `3_final_outputs/`
-
----
-
-## Verification Checklist
-
-Before completing Task 0.2, verify file locations:
-
-**1_shared_context/**
-- [ ] `meeting_records/Task0.2_Extremes_QA_Log.md` exists
-
-**2_agent_workspaces/task-0.2-extremes-intake/**
-- [ ] `config/required_skills.yaml` exists
-- [ ] `config/required_tools.yaml` exists
-- [ ] `phases/context_baseline.md` exists
-- [ ] `phases/industry_extremes_research.md` exists
-- [ ] `phases/extremes_questionnaire.md` exists
-- [ ] `phases/client_validation.md` exists
-- [ ] `templates/OUT-0.2_Template_Custom.md` exists
-
-**3_final_outputs/**
-- [ ] `OUT-0.2_[Topic]_Extremes_Redlines.md` exists
-- [ ] `Task_0.2_Handoff_Checklist.md` exists
-- [ ] `diagrams/OUT-0.2_Extremes_Topology.drawio` exists
-- [ ] `diagrams/OUT-0.2_Extremes_Topology.png` exists
+1. 在 `2_agent_workspaces/task-0.2-extremes-intake/phases/` 中完成推演草稿
+2. 经客户确认（Step 7 sign-off）后
+3. 将最终文档输出至 `3_final_outputs/`
+4. 将访谈记录实时同步至 `1_shared_context/meeting_records/`（Step 6 中进行，不等到最后）
