@@ -1,352 +1,321 @@
 # 9-Step Workflow for Task 0.3: Master Context Board Initialization
 
-## Step 1: 前置产物全量吸入与接棒 (Prerequisite Artifacts Intake & Handoff)
+> **Before EVERY step**: Update `.task_state.md` to `[IN_PROGRESS]`, print the Mental Ignition Log (Steps 4+: read `required_skills.yaml` first), execute, persist outputs, update to `[DONE]`, then emit the 🛑 Hard Stop.
 
-**⚠️ 系统特例铁律**: Task 0.3 是 Phase 0 的收官者！必须 100% 基于 Task 0.1 和 Task 0.2 的产出！
+---
 
-**Purpose**: Consolidate all Phase 0 outputs into a single source of truth
+## Step 1: 前置产物全量吸入与接棒
+
+**⚠️ 系统铁律**: Task 0.3 is Phase 0's closure. You MUST 100% build on Task 0.1 and Task 0.2 outputs. If either is missing — HALT.
 
 **Actions**:
-- **强制读取** `3_final_outputs/OUT-0.1_Core_Business_Intent.md`
-  - Extract business vision, drivers matrix, audience profiles, anti-goals
-- **强制读取** `3_final_outputs/OUT-0.2_[Topic]_Extremes_Redlines.md`
-  - Extract NFR extremes matrix, legal/security redlines, compromise decisions
-- **强制读取** `1_shared_context/meeting_records/Task0.1_LeadArchitect_QA_Log.md`
-- **强制读取** `1_shared_context/meeting_records/Task0.2_Extremes_QA_Log.md`
-- If any of these files are missing, **STOP IMMEDIATELY** and report the missing prerequisites
-
-**Validation**:
-- Verify OUT-0.1 contains all 5 required sections
-- Verify OUT-0.2 contains quantified extremes (no vague statements)
-- Check for contradictions between OUT-0.1 and OUT-0.2
+1. Read `3_final_outputs/OUT-0.1_Core_Business_Intent.md` — extract: business vision, drivers matrix, audience profiles, anti-goals
+2. Read `3_final_outputs/OUT-0.2_[Topic]_Extremes_Redlines.md` — extract: NFR extremes matrix, legal/security redlines, compromise decisions
+3. Read `1_shared_context/meeting_records/Task0.1_LeadArchitect_QA_Log.md`
+4. Read `1_shared_context/meeting_records/Task0.2_Extremes_QA_Log.md`
+5. **Validation checks**:
+   - OUT-0.1 contains all 5 required sections
+   - OUT-0.2 contains quantified extremes (zero vague statements)
+   - No internal contradictions between OUT-0.1 and OUT-0.2 (list them if found)
+6. If any prerequisite file is missing: **STOP** and ask user for the file location
 
 **Output**: `2_agent_workspaces/task-0-3-init-board/phases/prerequisites_intake.md`
 
-**Format**:
 ```markdown
-# Prerequisites Intake Summary
+# Prerequisites Intake Summary — Task 0.3
 
 ## OUT-0.1 Key Extracts
-- Business Vision: [One-sentence summary]
-- P0 Drivers: [List]
-- Target Audience: [Scale and characteristics]
-- Anti-Goals: [List]
+- Business Vision (1 sentence): [...]
+- Core Audience: [...]
+- Business Drivers Matrix: [Top 3 priorities with P0/P1/P2]
+- Anti-Goals: [What is explicitly out of scope]
 
 ## OUT-0.2 Key Extracts
-- QPS/TPS Limits: [Numbers]
-- HA Requirements: [RTO/RPO]
-- Security Redlines: [List]
-- Budget Constraints: [Summary]
+- NFR Extremes: [QPS/TPS, HA tier, data growth rate]
+- Hard Redlines: [Legal, security, timeline]
+- Compromise Decisions: [What was negotiated down]
 
-## Contradictions/Gaps Detected
-[List any conflicts or missing information]
+## Contradiction Map
+- [None detected] OR [List each contradiction with location]
+
+## Readiness Decision
+- [ ] All prerequisites present: YES/NO
+- [ ] Proceed to Step 2: YES/NO
 ```
+
+**State Update**: Set Step 1 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 1 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 2: 动态技术/技能装配 (Dynamic Skill Assembly)
+## Step 2: 动态专属专家角色与技能装配
 
-**Purpose**: Identify required skills for consolidating and structuring the Master Context Board
-
-**Required Skills**:
-- Information architecture and taxonomy design
-- Data mapping and transformation
-- Conflict resolution and gap analysis
-- Domain-driven design (DDD) context mapping
-- MECE (Mutually Exclusive, Collectively Exhaustive) structuring
+**Purpose**: Define the 全景总构架师 expert persona that will power all board synthesis work in Steps 4–9.
 
 **Actions**:
-- Based on the complexity of OUT-0.1 and OUT-0.2, identify needed structuring skills
-- Determine if domain-specific knowledge is required (e.g., financial systems, e-commerce)
-- 强制落盘写成 `required_skills.yaml` 供自身遵守
+- Based on Phase 0 contents (business domain, complexity, compliance requirements), determine:
+  - What level of synthesis architect is needed (global context integrator, MECE structure expert, conflict arbitrator)?
+  - Which information structuring methodologies are required (MECE decomposition, dependency graph tracing, conflict-resolution frameworks)?
+  - What synthesis failure patterns must be avoided (information duplication, premature gap-filling, false resolution of contradictions)?
+- Write `required_skills.yaml`
 
 **Output**: `2_agent_workspaces/task-0-3-init-board/config/required_skills.yaml`
 
-**Example**:
 ```yaml
-required_skills:
-  - name: "Information Architecture"
-    purpose: "Structure Master Context Board sections logically"
-    priority: "P0"
-  
-  - name: "Conflict Resolution"
-    purpose: "Resolve contradictions between OUT-0.1 and OUT-0.2"
-    priority: "P0"
-  
-  - name: "Domain Knowledge: E-commerce"
-    purpose: "Understand payment flow and inventory management context"
-    priority: "P1"
+# Required Expert Skills for Task 0.3
+
+role:
+  title: "全景总构架师 (Grand Board Architect)"
+  seniority: "15+ years enterprise architecture, has initialized project context boards for 20+ large-scale systems"
+  domain_focus: "[e.g., fintech platform / e-commerce system] — derived from OUT-0.1"
+
+synthesis_skills:
+  - name: "MECE Information Compression"
+    description: "Extract maximum signal from OUT-0.1/0.2 with zero redundancy"
+  - name: "Contradiction Surface & Resolution"
+    description: "Identify where OUT-0.1 business intent conflicts with OUT-0.2 extremes; propose arch compromises"
+  - name: "Structured Placeholder Design"
+    description: "Design typed [待认领] slots with clear ownership, enabling autonomous agent fill-in"
+  - name: "Downstream Impact Mapping"
+    description: "Know exactly which board fields drive which Phase 1 agent decisions"
+
+anti_patterns_to_avoid:
+  - "Copying instead of synthesizing"
+  - "Self-filling knowledge gaps without client approval"
+  - "False conflict resolution (picking one side without surfacing tradeoffs)"
+  - "Vague placeholder descriptions that downstream agents can't act on"
+
+failure_modes_to_watch:
+  - "OUT-0.1 audience scale contradicts OUT-0.2 budget constraints"
+  - "OUT-0.2 compliance level exceeds what OUT-0.1 budget allows"
+  - "Missing delivery deadline in either document"
 ```
+
+**State Update**: Set Step 2 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 2 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 3: 动态兵器/工具装配 (Dynamic Tool Assembly)
+## Step 3: 动态兵器/工具装配
 
-**Purpose**: Identify required tools for validation and verification
-
-**Required Tools**:
-- Markdown linting and validation
-- Diagram generation (Mermaid, DrawIO)
-- YAML/JSON schema validation
-- Web search (for industry standards verification)
-
-**Actions**:
-- Identify tools needed for Master Context Board validation
-- Determine if external verification is needed (e.g., compliance standards lookup)
-- 存底 `required_tools.yaml`
+**Purpose**: Identify tools needed for board validation and diagram generation.
 
 **Output**: `2_agent_workspaces/task-0-3-init-board/config/required_tools.yaml`
 
-**Example**:
 ```yaml
-required_tools:
-  - name: "Markdown Validator"
-    purpose: "Ensure Master Context Board follows markdown standards"
-    priority: "P1"
-  
-  - name: "Web Search"
-    purpose: "Verify compliance standards (等保三级, GDPR)"
-    priority: "P2"
+# Approved Tool Whitelist for Task 0.3
+
+file_read:
+  allowed: true
+  targets:
+    - "3_final_outputs/OUT-0.1_Core_Business_Intent.md"
+    - "3_final_outputs/OUT-0.2_[Topic]_Extremes_Redlines.md"
+    - "1_shared_context/meeting_records/"
+    - "architect/doc/Master_Context_Board_Template.md"
+    - "context/sop/"
+
+file_write:
+  allowed: true
+  allowed_paths:
+    - "1_shared_context/Master_Context_Board.md"
+    - "1_shared_context/meeting_records/Task0.3_Board_Validation_Log.md"
+    - "2_agent_workspaces/task-0-3-init-board/"
+    - "3_final_outputs/Task_0.3_Handoff_Checklist.md"
+
+glob_search:
+  allowed: true
+  purpose: "Find existing Master Context Board instances for pattern reference"
+
+web_search:
+  allowed: true
+  quality_constraints:
+    - "Enterprise architecture documentation only (AWS, Thoughtworks, Martin Fowler, TOGAF)"
+    - "FORBIDDEN: content farms, blog posts without authorship, outdated resources (>3 years)"
 ```
+
+**State Update**: Set Step 3 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 3 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 4: 同类工程架构与共识黑板预查 (Historical Blackboard Pattern Research)
+## Step 4: 透明化架构预案预查与双轨记录制
 
-**Purpose**: 带工具查阅系统以往项目中的全局黑板设计，以此启发自己即将搭建的大盘如何更好地服务于接下来的并发下游
+**Purpose**: Research best practices for Master Context Board design. Dual-track output for auditability.
 
-**⚠️ 工具强制要求**: 必须使用工具（Glob/Grep/Read）主动扫描系统内已有的 Master Context Board 实例，不能仅凭记忆或假设。
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-**Research Areas**:
-- 使用 Glob 扫描项目目录中所有 `Master_Context_Board*.md` 文件
-- 使用 Grep 搜索 `1_shared_context/` 下的历史黑板设计模式
-- Industry-standard architecture decision records (ADRs)
-- Common Master Context Board anti-patterns
-- Best practices for living documentation
+**Phase A — Propose Research Scope (HARD STOP FOR APPROVAL)**:
+- List planned research directions (e.g., enterprise ADR practices, living documentation patterns, context map design)
+- Present to client: "我要去查这些方向，您看是否需要删减或补充？"
+- **WAIT for client approval before any searches**
 
-**Actions**:
-- **强制工具扫描**: `Glob("**/Master_Context_Board*.md")` 查找系统内已有黑板实例
-- **强制工具扫描**: `Glob("**/1_shared_context/**")` 查看共享上下文目录结构
-- 分析已有黑板的结构设计，提炼对当前项目有启发的模式
-- Identify common pitfalls (e.g., stale data, unclear ownership, missing update protocols)
-- 存底研究结果启发自己的设计
+**Phase B — Execute Research (After Approval)**:
+- Search only approved directions
+- Only cite: enterprise architecture docs, Thoughtworks Tech Radar, TOGAF references, Martin Fowler articles
+- Also run: `Glob("**/Master_Context_Board*.md")` to find any existing board instances in the project
 
-**Output**: `2_agent_workspaces/task-0-3-init-board/phases/blackboard_research.md`
+**Phase C — Dual-Track Output**:
 
-**Format**:
+Track 1 — Research Conclusion:
+`2_agent_workspaces/task-0-3-init-board/phases/research_conclusion.md`
+
 ```markdown
-# Master Context Board Research
-
-## Existing Examples Found
-[List any existing Master Context Boards in the organization]
-
-## Best Practices Identified
-- Keep it concise (< 500 lines)
-- Use clear section headers
-- Include update timestamps
-- Define ownership for each section
-
-## Anti-Patterns to Avoid
-- Duplicating information from other docs
-- Vague or unmeasurable statements
-- Missing update protocols
-- Unclear question resolution process
-
-## Design Decisions for This Board
-[How this research informs the current Master Context Board design]
+# Architecture Research Conclusion — Task 0.3
+## Best Practices Found
+- [Key pattern 1 and why it applies to this project]
+- [Key pattern 2]
+## Existing Board Instances
+- [Any found via Glob, what patterns they use]
+## Insights for Board Design
+- [Specific structural decisions informed by research]
 ```
+
+Track 2 — Research Trace Log:
+`2_agent_workspaces/task-0-3-init-board/Research_Trace_Log.md`
+
+```markdown
+# Research Trace Log — Task 0.3
+| URL / Source | Quality | Kept? | Reason |
+|---|---|---|---|
+| [URL] | [Enterprise docs / blog] | ✅/❌ | [Why kept or rejected] |
+```
+
+**State Update**: Set Step 4 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 4 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 5: 强映射填充动作规划 (Strong Mapping & Filling Action Plan)
+## Step 5: 强映射填充动作规划
 
-**Purpose**: Plan the precise mapping from OUT-0.1 and OUT-0.2 to Master Context Board sections
+**Purpose**: Using `assets/Master_Context_Board_Template.md`, create a precise mapping plan showing which OUT-0.1/0.2 field feeds each board section.
 
-**Mapping Rules**:
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-### Section 1: 核心商业意志定调 (Business Initial Context)
-**Source**: OUT-0.1
+**Section 1 Mapping** (核心商业意志定调):
 - **立项基调 / Topic** ← OUT-0.1 Section 1 (业务愿景与执行摘要)
 - **金字塔尖目标受众** ← OUT-0.1 Section 3 (金字塔尖核心涉众评估)
-- **交付死线** ← OUT-0.2 Section 3 (全局硬性红线排雷网 - Timeline redlines)
+- **交付死线** ← OUT-0.2 Section 3 (Timeline redlines)
 
-### Section 2: 宏观水线与绝不可侵犯的底线 (Global NFRs & Redlines)
-**Source**: OUT-0.2
-- **预期规模体量** ← OUT-0.2 Section 2 (宏观水线极值博弈矩阵 - QPS/TPS/DAU)
-- **端渲染矩阵** ← OUT-0.1 Section 3 (受众端分类) + OUT-0.2 (兼容性红线)
-- **红线管控** ← OUT-0.2 Section 3 (全局硬性红线排雷网 - Legal/Security)
+**Section 2 Mapping** (宏观水线与绝不可侵犯的底线):
+- **预期规模体量** (DAU/TPS) ← OUT-0.2 Section 2 (宏观水线极值博弈矩阵)
+- **端渲染矩阵** ← OUT-0.1 Section 3 (audience device types) + OUT-0.2 (compatibility redlines)
+- **红线管控** ← OUT-0.2 Section 3 (Legal/Security redlines)
 
-### Section 3: 专业动态域问题状态机 (Real-time Domain Query State-Machine)
-**Source**: Gaps and open questions from OUT-0.1 and OUT-0.2
-- Identify unanswered questions from meeting logs
-- Create placeholder slots with `[待认领]` or `[提问中]` tags
-- Assign ownership to specific agent types (@后端架构师, @前端架构师, @UI_UX设计师)
+**Section 3 Planning** (专业动态域问题状态机):
+- Identify fields in OUT-0.1 and OUT-0.2 that were left ambiguous or explicitly punted
+- Create typed placeholder slots with `@Agent` ownership
+- Assign: `@后端架构师` for data/infra questions, `@前端架构师` for rendering questions, `@UI_UX设计师` for brand/design questions
 
-**Actions**:
-- Create detailed mapping table
-- Identify transformation rules (e.g., "50K DAU peak" → "预期规模体量: 日活 5万 (峰值)")
-- Plan conflict resolution strategy
-- Design placeholder structure for open questions
+**Contradiction Handling**:
+For each contradiction detected in Step 1, document:
+- What OUT-0.1 says vs. what OUT-0.2 says
+- The architectural implication
+- A concrete compromise option to propose to client in Step 6
 
 **Output**: `2_agent_workspaces/task-0-3-init-board/phases/mapping_plan.md`
 
-**Format**:
-```markdown
-# Mapping Plan: OUT-0.1/OUT-0.2 → Master Context Board
+**State Update**: Set Step 5 → `[DONE]`
 
-## Section 1 Mapping
-| Master Context Board Field | Source | Transformation Rule |
-|---|---|---|
-| 立项基调 / Topic | OUT-0.1 Section 1 | Extract one-sentence vision |
-| 金字塔尖目标受众 | OUT-0.1 Section 3 | Summarize audience types and scale |
-| 交付死线 | OUT-0.2 Section 3 | Extract timeline redline |
-
-## Section 2 Mapping
-[Similar table for Section 2]
-
-## Section 3: Open Questions Identified
-- [ ] @后端架构师: Data retention policy for hot vs. cold data
-- [ ] @前端架构师: Browser compatibility requirements beyond IE11
-- [ ] @UI_UX设计师: Brand guidelines and design system constraints
-
-## Conflicts Detected
-[List any contradictions between OUT-0.1 and OUT-0.2]
-```
+> `[🛑 物理硬锁: Step 5 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 6: 动态黑板确认对齐机制 (Dynamic Blackboard Validation & Alignment)
+## Step 6: 基于专属大盘确认的纠偏指导
 
-**Purpose**: Validate the consolidated Master Context Board with the client before finalizing
+**Purpose**: Generate draft board + expose ALL conflicts and gaps to client with architect-grade recommendations.
 
-**⚠️ 严格红线指令**: Master Context Board is the **Single Source of Truth** for the entire project. This validation is CRITICAL!
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-**Validation Checklist**:
-- [ ] All P0 business drivers from OUT-0.1 are represented
-- [ ] All security/legal redlines from OUT-0.2 are captured
-- [ ] No contradictions between sections
-- [ ] All quantified values are accurate (no rounding errors)
-- [ ] Open questions are clearly marked with ownership
+**【严格红线指令】** As the sole Source of Truth for the entire project, this action is the most solemn. Follow these rules absolutely:
 
-**Conflict Resolution Protocol**:
-If contradictions or gaps are detected:
-1. **DO NOT** make assumptions or fill in gaps yourself
-2. **MUST** expose the conflict to the user/client
-3. **MUST** wait for explicit client decision
-4. **MUST** document the resolution in meeting records
+**Rule 1 — Never self-fill gaps**: If information is missing, create a typed placeholder. Do NOT guess.
+
+**Rule 2 — Always surface contradictions WITH a recommendation**: Don't just say "there's a conflict". Say:
+> "发现冲突：OUT-0.1 要求支持 3 个端（Web/Android/iOS），但 OUT-0.2 的预算红线只够支撑 1 个端的 CDN 费用。建议的技术妥协方案：优先做 Web 端（PWA 渐进式），Mobile App 延迟至 Phase 2。请确认是否接受此方案？"
+
+**Rule 3 — Wait for explicit client decision before proceeding**.
 
 **Actions**:
-- Generate draft Master Context Board
-- Identify all conflicts, gaps, and ambiguities
-- Prepare validation questions for client
-- Conduct validation session with client
-- Document client's decisions
+1. Generate draft `Master_Context_Board.md` based on mapping plan
+2. For each gap/contradiction: prepare specific question + architectural compromise recommendation
+3. Conduct client validation session
+4. Record all decisions in meeting log
 
-**Output**: 
+**Outputs**:
 - `2_agent_workspaces/task-0-3-init-board/phases/draft_master_context_board.md`
-- `2_agent_workspaces/task-0-3-init-board/phases/validation_questions.md`
 - `1_shared_context/meeting_records/Task0.3_Board_Validation_Log.md`
 
-**Validation Questions Format**:
 ```markdown
-# Master Context Board Validation Questions
+# Task 0.3 Board Validation Log
+**Date**: YYYY-MM-DD
 
-## Conflicts Detected
+## Gap Resolution Record
+| Gap Identified | Architect Recommendation | Client Decision |
+|---|---|---|
+| [Missing field] | [Concrete proposal with rationale] | [Client choice] |
 
-### Conflict 1: Audience Scale Mismatch
-- OUT-0.1 states: "50K DAU peak"
-- OUT-0.2 states: "System must handle 100K TPS"
-- **Question**: Which is correct? Or are both correct (implying high requests per user)?
-
-### Conflict 2: Timeline vs. Scope
-- OUT-0.1 includes feature X as P0
-- OUT-0.2 deadline is 2 months away
-- **Question**: Given the tight deadline, should feature X be descoped or is the deadline flexible?
-
-## Gaps Detected
-
-### Gap 1: Data Retention Policy
-- OUT-0.2 mentions "6-month hot data retention"
-- **Question**: What happens to data after 6 months? Archive? Delete? Cold storage?
-
-## Client Decisions
-[To be filled during validation session]
+## Contradiction Resolution Record
+| Contradiction | OUT-0.1 Position | OUT-0.2 Position | Compromise Proposed | Final Decision |
+|---|---|---|---|---|
 ```
+
+**State Update**: Set Step 6 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 6 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 7: 遗留黑板问题的占坑式衍生 (Placeholder Slots for Open Questions)
+## Step 7: 遗留黑板问题的占坑式衍生
 
-**Purpose**: Create structured placeholder slots for questions that cannot be answered yet
+**Purpose**: Create well-structured placeholder slots for all remaining open questions. Do NOT fabricate answers.
 
-**⚠️ 绝对禁止造假**: If upstream extraction left gaps (e.g., frontend specs, database constraints), DO NOT fabricate answers!
-
-**Placeholder Structure**:
-```markdown
-*   `[待认领]` **@{Agent Type}**：{Question description}
-    > **定论写入**：{This will be filled when the question is answered}
-```
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
 **Placeholder States**:
-- `[待认领]`: Question identified but not yet assigned
-- `[提问中]`: Agent is actively investigating (asking client or researching)
-- `[已决断]`: Question answered, conclusion documented
+- `[待认领]` — Identified, not yet assigned to an active agent
+- `[提问中]` — Agent is actively investigating (asking client or researching)
+- `[已决断]` — Resolved, conclusion written in place
 
-**Actions**:
-- Review OUT-0.1 and OUT-0.2 for implicit gaps
-- Review meeting logs for unanswered questions
-- Create placeholder slots in Section 3 of Master Context Board
-- Assign ownership to appropriate agent types
-- Document the question clearly so downstream agents understand what's missing
-
-**Output**: Placeholder slots integrated into draft Master Context Board
-
-**Example Placeholders**:
+**Placeholder Format**:
 ```markdown
-## 3. 专业动态域问题状态机 (Real-time Domain Query State-Machine)
-
-*   `[已决断]` **@UI_UX设计师**：客户有没有既定的品牌 UI 素材库 (Brand VIS Guidelines) 必须死守？
-    > **定论写入**：客户明确不能逾越，需强制引入并依赖企业版 `AntDesign v5` 色系，禁止自己搞花活调色板。
-
-*   `[提问中]` **@后端架构师**：我看到这里预期有 50 万日活，但没写订单流水的读写保留时长。对于这部分热点数据，我需要确认具体的冷备抽丝阀值。我这就去向客户下发深度追问单。
-
-*   `[待认领]` **@前端架构师**：OUT-0.2 提到需要兼容 IE11，但没有明确其他浏览器的最低版本要求。需要确认 Chrome/Safari/Firefox 的最低支持版本。
-
-*   `[待认领]` **@后端架构师**：数据库选型尚未确定。需要基于 QPS 极值和数据增长曲线，推荐 MySQL/PostgreSQL/MongoDB 等方案并获客户批准。
+*   `[待认领]` **@{AgentType}**: {Clear, specific question the agent can act on immediately}
+    > **定论写入**: {此将在问题被回答后填充}
 ```
+
+**Assignment Guidelines**:
+- `@后端架构师` — data retention, caching strategy, DB schema constraints, API versioning
+- `@前端架构师` — SSR/CSR/SSG decision, bundle size budget, browser support range
+- `@UI_UX设计师` — brand assets, design system, component library constraints
+
+**Quality Check**:
+- Is each question specific enough for an agent to act on without further clarification?
+- Does each slot have an owner?
+- Are the states accurate (no false `[已决断]` without actual decisions)?
+
+Update draft board with all placeholder slots.
+
+**State Update**: Set Step 7 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 7 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 8: 跨界直接降临逻辑与主工作目录落盘 (Cross-Boundary Deployment to Shared Context)
+## Step 8: 跨界直接降临逻辑与主工作目录落盘
 
-**Purpose**: Deploy the finalized Master Context Board to the global shared context directory
+**Purpose**: Deploy the finalized board to its permanent home in `1_shared_context/`. This is the cross-boundary deployment moment.
 
-**⚠️ 核心要求**: The Master Context Board is NOT a normal deliverable! It is the **living, breathing, single source of truth** for the entire project!
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-**Deployment Location**:
-```
-1_shared_context/Master_Context_Board.md
-```
-
-**NOT**:
-- ❌ `2_agent_workspaces/task-0-3-init-board/Master_Context_Board.md` (private workspace)
-- ❌ `3_final_outputs/Master_Context_Board.md` (final outputs)
-
-**Why `1_shared_context/`?**
-- All downstream agents (backend, frontend, UI/UX) must read this file
-- It's a living document that gets updated throughout the project lifecycle
-- It's the central nervous system of the project
+**⚠️ SUPREME ORDER**: The Master Context Board must NEVER remain in the private workspace.
 
 **Actions**:
-- Finalize Master Context Board based on client validation
-- Remove all draft markers and TODOs
-- Add metadata header (creation date, last updated, version)
-- Deploy to `1_shared_context/Master_Context_Board.md`
-- Verify file permissions (all agents can read)
+1. Finalize the board — remove all draft markers and TODO comments
+2. Add metadata header:
 
-**Output**: `1_shared_context/Master_Context_Board.md`
-
-**Metadata Header Format**:
 ```markdown
 # [项目名] - 全局共享需求大盘 (Master Context Board)
 
@@ -356,113 +325,70 @@ If contradictions or gaps are detected:
 * **最后更新 (Last Updated)**: YYYY-MM-DD
 * **版本 (Version)**: v1.0
 * **负责人 (Owner)**: Lead Architect (Task 0.3)
-* **状态 (Status)**: Active
+* **状态 (Status)**: Active — 持续迭代中
 
 > ⚠️ **项目核心数据流砥柱 (Single Source of Truth)**
-> 此文档不是用完即抛的记录单，而是本项目持续活跃的"全局系统环境变量"。**所有专业领域架构师（后端、前端、UI/UX）** 在各阶段索取架构决策级的信息时，必须优先读此表。如有任何由于专业壁垒产生的独有疑问，必须采取"登记疑问 => 去问客户 => 拿回结论写板"的自闭环操作。严格禁止私自拦截隐瞒业务知识。
+> 此文档不是用完即抛的记录单，而是本项目持续活跃的"全局系统环境变量"。
 ```
+
+3. Write to `1_shared_context/Master_Context_Board.md`
+4. Verify the file is readable (check path, no permission issues)
+
+**Quality Gates**:
+- [ ] Zero vague terms or TODO markers remain
+- [ ] All 3 required sections present and populated
+- [ ] All placeholder slots have owner tags and status
+- [ ] File is at `1_shared_context/Master_Context_Board.md` — NOT anywhere else
+
+**State Update**: Set Step 8 → `[DONE]`
+
+> `[🛑 物理硬锁: Step 8 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
 
 ---
 
-## Step 9: 全局资产发令枪打响与拓扑闭环 (Global Asset Announcement & Topology Closure)
+## Step 9: 全局资产发令枪打响与拓扑闭环
 
-**Purpose**: Announce the Master Context Board creation and close Phase 0
+**Purpose**: Update global SOP assets and issue the formal Phase 0 closure + Phase 1 activation announcement.
 
-**⚠️ 最为庄重的系统宣告**: This is the moment Phase 0 officially completes and Phase 1 begins!
+**⚠️ MANDATORY**: Read `required_skills.yaml` before starting and print Mental Ignition Log.
 
-**Actions**:
+**Part A — Global Asset Updates**:
+1. Edit `context/sop/Project_Global_IO_Pipeline_Template.md`:
+   - Add `Master_Context_Board.md` as a new node in the global data flow
+   - Record which downstream tasks consume it
+2. Edit `context/sop/Architect SOP.md` (or equivalent):
+   - Add Task 0.3 completion record with timestamp
 
-### 9.1 Update Architect SOP (代码修改，非口头声明)
-- **强制代码修改**: 使用 Edit 工具直接修改 `Architect SOP.md`（或等效文件）
-- Add Task 0.3 completion record with timestamp
-- Document any lessons learned or process improvements
-- Update the SOP if new patterns were discovered
-- **不允许仅口头描述**——必须实际写入文件
-
-### 9.2 Update Project Global IO Pipeline (代码修改，非口头声明)
-- **强制代码修改**: 使用 Edit 工具直接修改 `Project_Global_IO_Pipeline_Template.md`（或等效文件）
-- Add Master Context Board to the global data flow diagram
-- Document how downstream tasks should consume the Master Context Board
-- **不允许仅口头描述**——必须实际写入文件
-
-### 9.3 Create Handoff Checklist
-- Create `3_final_outputs/Task_0.3_Handoff_Checklist.md`
-- List all Phase 0 deliverables (OUT-0.1, OUT-0.2, Master Context Board)
-- Highlight critical redlines and constraints for downstream agents
-- Provide reading guide for Master Context Board
-
-### 9.4 System-Wide Announcement (庄重系统宣告)
-
-Generate the formal announcement — this is the most solemn moment of Phase 0:
-
-```
-🚨 全系警报提示！活体上帝黑板已物理落盘完工！
-Phase 0 破冰正式闭环，即刻向全体研发Agent节点（后端、前端、UI/UX）
-发出查阅与大举进攻建站的进场信号！
-```
-
-Then follow with the structured announcement document:
+**Part B — Handoff Checklist**:
+Write `3_final_outputs/Task_0.3_Handoff_Checklist.md`:
 
 ```markdown
-# 🚨 PHASE 0 COMPLETE - MASTER CONTEXT BOARD ACTIVATED 🚨
+# Task 0.3 Handoff Checklist
 
-**Date**: YYYY-MM-DD
-**Milestone**: Phase 0 (Lead Architect Intake) Complete
+## Phase 0 Deliverables Confirmed
+- [ ] `1_shared_context/Master_Context_Board.md` — PRIMARY OUTPUT
+- [ ] `1_shared_context/meeting_records/Task0.3_Board_Validation_Log.md`
 
-## Deliverables
-✅ OUT-0.1: Core Business Intent & Audience Matrix
-✅ OUT-0.2: Global Extremes & Redlines Cache
-✅ Master Context Board: Single Source of Truth
+## Phase 1 Activation Signal
+- **Task 1.1**: Read Master_Context_Board.md Section 1 (business context, audience scale)
+- **Task 1.2 (NFR)**: Read Section 2 (NFR extremes, redlines) — hard constraints
+- **All Phase 1 Agents**: Section 3 — claim your `[待认领]` slots
 
-## Master Context Board Location
-📍 `1_shared_context/Master_Context_Board.md`
+## Open Question Slots Summary
+| Owner | Count | Urgency |
+|---|---|---|
+| @后端架构师 | [N] | [P0 questions] |
+| @前端架构师 | [N] | [P0 questions] |
+| @UI_UX设计师 | [N] | [P0 questions] |
 
-## Critical Highlights for Downstream Agents
-
-### 🔴 Non-Negotiable Redlines
-- [List P0 security/legal/timeline redlines]
-
-### 📊 Capacity Constraints
-- [List QPS/TPS/DAU limits]
-
-### 🎯 Business Priorities
-- [List P0 business drivers]
-
-## Next Steps
-Phase 1 agents (Backend, Frontend, UI/UX) may now proceed with:
-- Task 1.1: Topic Intake & Business Blueprint
-- Task 1.2: NFR Extraction & Quantification
-
-**READ THE MASTER CONTEXT BOARD FIRST!**
-All architecture decisions must align with the Master Context Board.
-
----
-**Phase 0 Status**: ✅ CLOSED
-**Phase 1 Status**: 🟢 OPEN FOR BUSINESS
+## Handoff Date
+YYYY-MM-DD
 ```
 
-**Output**:
-- Updated `Architect SOP.md`
-- Updated `Project_Global_IO_Pipeline_Template.md`
-- `3_final_outputs/Task_0.3_Handoff_Checklist.md`
-- `3_final_outputs/Phase_0_Completion_Announcement.md`
+**Part C — System Announcement**:
 
----
+> "🚨 全系警报提示！活体上帝黑板已物理落盘完工！Phase 0 破冰正式闭环，即刻向全体研发 Agent 节点（后端、前端、UI/UX）发出查阅与大举进攻建站的进场信号！Master Context Board 已在 `1_shared_context/Master_Context_Board.md` 就位，Phase 1 全线开放！"
 
-## Workflow Completion Checklist
+**State Update**: Set Step 9 → `[DONE]`
 
-Before marking Task 0.3 as complete, verify:
-
-- [ ] Step 1: OUT-0.1 and OUT-0.2 已读取并提取
-- [ ] Step 2: `config/required_skills.yaml` 已创建
-- [ ] Step 3: `config/required_tools.yaml` 已创建
-- [ ] Step 4: `phases/blackboard_research.md` 已完成
-- [ ] Step 5: `phases/mapping_plan.md` 已创建
-- [ ] Step 6: `phases/validation_questions.md` 已创建并获客户确认
-- [ ] Step 6: `1_shared_context/meeting_records/Task0.3_Board_Validation_Log.md` 已记录
-- [ ] Step 7: 所有开放问题已创建占位符
-- [ ] Step 8: `1_shared_context/Master_Context_Board.md` 已部署
-- [ ] Step 9: `3_final_outputs/Task_0.3_Handoff_Checklist.md` 已创建
-- [ ] Step 9: `3_final_outputs/Phase_0_Completion_Announcement.md` 已创建
-- [ ] Step 9: Architect SOP 已更新
-- [ ] Step 9: Project Global IO Pipeline 已更新
+> `[🛑 物理硬锁: Step 9 已就绪！Task 0.3 全部完成，Phase 0 正式闭环，Phase 1 全线激活]`

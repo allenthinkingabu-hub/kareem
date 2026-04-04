@@ -1,58 +1,99 @@
 ---
 name: architect-task-1-1-intake
-description: Architect AI Agent Skill for Task 1.1 — 拆解 Topic 商业与功能目标 (Topic Intake & Business Blueprint). 执行结构化 9 步 SOP,将用户原始需求 Topic 转化为完整的《核心业务场景与功能点定义规划书》(OUT-1.1), 包含动态模版进化与客户对齐、以及全局 SOP 资产反写知识闭环。 USE when (1) 用户提供新的架构 Topic 或产品需求,需要拆解为业务场景、用例、功能点和范围边界; (2) 开始 Architect SOP 的 Phase 1; (3) 用户说"开始 Task 1.1"、"帮我分析需求"、"做需求拆解",或描述一个需要从头架构的功能/系统; (4) Master_Context_Board.md 或 OUT-0.1 已存在,需要基于此进行业务场景拆解。
+description: Architect AI Agent Skill for Task 1.1 — 拆解 Topic 商业与功能目标 (Topic Business Blueprint). Execute structured 9-step SOP with state checkpointing and mandatory hard stops to decompose business requirements into use cases, functional capabilities matrix, and boundary declarations, producing OUT-1.1 document. USE when (1) user provides a new architecture Topic or product requirement needing decomposition into business scenarios and functional points; (2) starting Architect SOP Phase 1; (3) user says "开始 Task 1.1", "帮我分析需求", "做需求拆解", or describes a feature/system needing architecture from scratch; (4) Master_Context_Board.md or OUT-0.1 exists and business scenario decomposition is needed.
 ---
 
 # Task 1.1: Topic Intake & Business Blueprint
 
-## Overview
+## 🗺️ Global Path Directory Binding
 
-You are executing **Task 1.1: 拆解 Topic 商业与功能目标** - transforming raw business requirements into a structured business blueprint with use cases, functional capabilities, and clear boundaries.
+**⚠️ HALLUCINATION ZERO-TOLERANCE**: All file access MUST use these exact paths. Never fabricate paths.
 
-**Mission**: Read the global context board (Master_Context_Board.md or OUT-0.1), conduct restrained inquiry to fill gaps, perform industry research, design expert questionnaire, conduct customer interview, evolve the template dynamically, and produce the final OUT-1.1 deliverable with downstream impact mapping.
-
-## 全局基石档案寻址坐标 (Global Path Directory Binding)
-
-**⚠️ 严厉警告**: 未来任何文件存取必须基于以下确切路径，**严禁凭空幻觉捏造路径！**
-
-| 资产类型 | 固定路径 |
-|---------|---------|
-| 全局交付物依赖图谱 (DAG 总纲) | `context/sop/Project_Global_IO_Pipeline_Template.md` |
-| 各领域 SOP 总控册 | `context/sop/` 目录下 |
-| 引擎大脑与活体大盘 (Master Context) | `1_shared_context/Master_Context_Board.md` |
-| 标准交付物模板库 | `architect/doc/` 目录下 |
+| Resource | Exact Path |
+|---|---|
+| Global IO Pipeline DAG | `context/sop/Project_Global_IO_Pipeline_Template.md` |
+| SOP Master Registry | `context/sop/` directory |
+| Master Context Board | `1_shared_context/Master_Context_Board.md` |
+| Output Template Library | `architect/doc/` directory |
+| Task 1.1 Output Template | `architect/doc/OUT-1.1_Template.md` (also `assets/OUT-1.1_Template.md`) |
+| Interview Log | `1_shared_context/meeting_records/Task1.1_Intake_QA_Log.md` |
+| Final Deliverable | `3_final_outputs/OUT-1.1_[Topic].md` |
 
 ---
 
-## Action Execution Protocol
+## Overview
 
-**⚠️ CRITICAL**: Before starting each major step (1-9), print a step confirmation log to maintain focus and prevent skipping:
+You are executing **Task 1.1: 拆解 Topic 商业与功能目标** — transforming a raw business Topic into a structured blueprint: use cases, functional capabilities matrix, and explicit boundary declarations.
+
+**Key constraint**: Read from `Master_Context_Board.md` first. Only ask the client questions about gaps in YOUR specialist domain — never re-ask what's already in the board.
+
+---
+
+## ⚙️ Execution Protocol & State Checkpointing
+
+### 1. State Machine Checkpointing (MANDATORY)
+
+**On first activation**, immediately read and maintain:
+`2_agent_workspaces/task-1.1-intake/.task_state.md`
+
+Before each Step: update to `[IN_PROGRESS]`. After completing and persisting outputs: update to `[DONE]`.
+
+**ABSOLUTE RULE**: If a prerequisite Step is not `[DONE]`, execution is BLOCKED.
+
+```markdown
+# Task 1.1 State Board
+- Step 1 (前置摄入): [DONE/IN_PROGRESS/PENDING]
+- Step 2 (技能装配): [DONE/IN_PROGRESS/PENDING]
+- Step 3 (工具装配): [DONE/IN_PROGRESS/PENDING]
+- Step 4 (透明预研): [DONE/IN_PROGRESS/PENDING]
+- Step 5 (问卷生成): [DONE/IN_PROGRESS/PENDING]
+- Step 6 (访谈实录): [DONE/IN_PROGRESS/PENDING]
+- Step 7 (模版定案): [DONE/IN_PROGRESS/PENDING]
+- Step 8 (成文交付): [DONE/IN_PROGRESS/PENDING]
+- Step 9 (SOP反写): [DONE/IN_PROGRESS/PENDING]
+```
+
+### 2. Mental Ignition Log (MANDATORY before each Step)
+
+Before executing any Step (Step 4 onwards), **MUST read `required_skills.yaml` first**, then print:
 
 ```
-▶ [Step {N} 启动确认]
+▶ [Step {N} 启动确认与心智点火]
+- 正在扮演的角色与经验池: [Read from required_skills.yaml — expert role description]
+- 本步必须运用的专属技能: [List domain decomposition / use-case / MECE skills from yaml]
 - 本步目标: [What this step accomplishes]
-- 限定使用的技术/技能: [Skills from Step 2 config, or N/A if Step 2 not done]
-- 限定利用的工具栈: [Tools from Step 3 config, or N/A if Step 3 not done]
-- 执行逻辑: [How this step feeds into the next]
+- 执行逻辑: [How this feeds into OUT-1.1]
 ```
 
-This is a death line against forgetting and lazy step-skipping.
+### 3. 🛑 Physical Hard Stop (MANDATORY after EVERY Step)
+
+**【🚨 FATAL DEFENSE LINE】** After completing each Step and persisting all outputs:
+
+**NEVER execute two Steps consecutively without human approval.**
+
+Every Step MUST end with:
+
+> `[🛑 物理硬锁: Step {N} 已就绪！强制暂停等待人类长官输入批准指令后，方可进入下一 Step]`
+
+---
 
 ## Workflow
 
-Execute the **9-step closed-loop SOP**. Read `references/9-step-workflow.md` for detailed instructions on each step.
+Execute the **9-step closed-loop SOP**. Read `references/9-step-workflow.md` for detailed instructions.
 
 ### Quick Reference
 
-1. **前置大盘摄入与克制盘问**: Read Master_Context_Board.md or OUT-0.1, identify gaps, ask only when necessary
-2. **动态技术/技能装配**: Identify required architect skills → `1_shared_context/config/task-1.1/required_skills.yaml`
-3. **动态兵器/工具装配**: Identify required tools → `1_shared_context/config/task-1.1/required_tools.yaml`
-4. **行业标准防盲盒预研**: Pre-research gate (pause for user approval) → research → dual-track output: `phase4_research.md` + `Research_Trace_Log.md`
-5. **沉浸式问卷对齐**: Design expert questionnaire → `2_agent_workspaces/task-1.1-intake/phases/phase5_questionnaire.md`
-6. **客户切片访谈与实录入公共库**: Conduct interview → `1_shared_context/meeting_records/Task1.1_Intake_QA_Log.md`
-7. **模版动态进化与强制拦截对齐**: Evolve template and get client sign-off → `2_agent_workspaces/task-1.1-intake/templates/OUT-1.1_Template_Custom.md`
-8. **双轨纯血成文制图与交付分发**: Produce final OUT-1.1 → `3_final_outputs/OUT-1.1_[Topic].md`
-9. **全局 SOP 资产反写与知识闭环**: Update Architect SOP and Project_Global_IO_Pipeline_Template documents
+1. **前置大盘摄入与克制盘问**: Read `Master_Context_Board.md` / OUT-0.x; only ask client for gaps in your specialist domain; update board `[提问中]`/`[已决断]`
+2. **动态专属专家角色与技能装配**: Define architect persona for this Topic domain → `config/required_skills.yaml`
+3. **动态兵器/工具装配**: Identify research tools → `config/required_tools.yaml`
+4. **透明化预研与双轨记录制**: Research with client-approved scope → conclusion draft + `Research_Trace_Log.md`
+5. **沉浸式问卷对齐**: Build killer questionnaire from `OUT-1.1_Template.md` structure + industry findings
+6. **基于专属问卷的访谈实录与专业纠偏指导**: Ruthless interview + architect downgrade recommendations → `1_shared_context/meeting_records/`
+7. **模版动态进化与强制拦截对齐**: Customize template + mandatory client sign-off
+8. **双轨纯血成文制图与交付分发**: Produce final `OUT-1.1_[Topic].md` + Mermaid + `.drawio` → `3_final_outputs/`
+9. **全局 SOP 资产反写闭环**: Update `Architect SOP.md` + `Project_Global_IO_Pipeline_Template.md`
+
+---
 
 ## 3-Tier Architecture Compliance
 
@@ -61,106 +102,74 @@ Execute the **9-step closed-loop SOP**. Read `references/9-step-workflow.md` for
 ### Quick Rules
 
 **1_shared_context/** (Global shared):
-- READ: Master_Context_Board.md or OUT-0.1_Core_Business_Intent.md
-- WRITE: meeting_records/Task1.1_Intake_QA_Log.md
-- WRITE: config/task-1.1/required_skills.yaml
-- WRITE: config/task-1.1/required_tools.yaml
+- Read `Master_Context_Board.md` — update its `[提问中]`/`[已决断]` slots directly
+- Write interview log to `meeting_records/Task1.1_Intake_QA_Log.md`
 
 **2_agent_workspaces/task-1.1-intake/** (Private sandbox):
-- Store custom templates, phase drafts, research notes
-- Only Task 1.1 can access
-- Not visible to other agents
+- `.task_state.md`, `config/`, `templates/`, `phases/`, `Research_Trace_Log.md`
+- Only Task 1.1 accesses this
 
-**3_final_outputs/** (Final deliverables):
-- Store validated OUT-1.1 document
-- Store diagrams (.drawio source files)
-- All agents can read
+**3_final_outputs/** (Final delivery):
+- `OUT-1.1_[Topic].md`
+- `diagrams/UC-xx-*.drawio`
+
+---
 
 ## Output Template
 
-Use `assets/OUT-1.1_Template.md` as the base structure. The final document must include:
+Use `assets/OUT-1.1_Template.md` as the base. Final document must include:
 
-1. **业务愿景与执行摘要**: Core business value and pain points
-2. **目标用户与涉众分析**: Actor types and their expectations
-3. **核心业务场景**: Use cases with flow diagrams (.drawio)
-4. **功能特性拆解矩阵**: MECE functional capabilities with acceptance criteria
-5. **明确的反向边界**: Out of scope items
-6. **上下文流转**: How OUT-1.1 content impacts downstream tasks
+1. **业务愿景与执行摘要**: 1-3 sentences on core business value + root pain point
+2. **目标用户与涉众分析**: Actor table with key expectations
+3. **核心业务场景**: Use cases (UC-xx) with process narrative + Mermaid diagram + `.drawio` file
+4. **功能特性拆解矩阵**: FEAT-xx table (MECE) with acceptance rules and P0/P1/P2 priority
+5. **明确的反向边界**: Explicit out-of-scope items
+6. **上下文流转**: How OUT-1.1 elements drive downstream OUT-1.2, OUT-2.1, OUT-3.1, OUT-4.x
+
+---
 
 ## Key Principles
 
-### Read Global Context First
-- NEVER ask for macro business intent directly
-- MUST read Master_Context_Board.md or OUT-0.1 first
-- Only ask when professional domain parameters are missing
-- Record `[提问中]` before asking, `[已决断]` after deciding
+### Restrained Inquiry — Read Before Asking
+First read `Master_Context_Board.md`. Only ask what the board doesn't answer. Mark questions `[提问中]` on the board; write back `[已决断]` after resolution.
 
-### Dynamic Configuration
-- Generate required_skills.yaml based on Topic
-- Generate required_tools.yaml based on skills
-- All subsequent steps MUST follow these configs
-- Configs can be manually edited and reloaded
+### MECE Decomposition
+Features must be Mutually Exclusive, Collectively Exhaustive. No overlap, no gaps. Every FEAT must be independently implementable.
 
-### Industry Research
-- Use only whitelisted tools from Step 3
-- Find authoritative enterprise solutions
-- Identify common pitfalls
-- Extract best practices for questionnaire design
+### Force Quantified Acceptance Criteria
+Reject vague requirements. "Fast" → "P99 < 200ms". "Secure" → "SM4 encryption + 等保三级 audit trail".
 
-### Template Evolution
-- Don't rigidly follow base template
-- Evolve template based on real project needs
-- Examples: add service mesh for microservices, add i18n for global business
-- MUST get client sign-off before Step 8
+### Architecture Integrity in Interviews
+When clients demand unrealistic features (e.g., real-time + offline + < $100/month), invoke architect expertise immediately:
+- State the technical contradiction
+- Offer concrete downgrade path (e.g., "offline mode deferred to Phase 2")
+- Force documented tradeoff decision
 
-### Knowledge Closure
-- Update Architect SOP.md with new template dimensions
-- Update Architect_SOP_IO_Mapping.md with downstream impacts
-- Prevent system entropy increase
+---
 
 ## Deliverables Checklist
 
-Before completing Task 1.1, verify all deliverables exist:
-
-- [ ] `1_shared_context/config/task-1.1/required_skills.yaml`
-- [ ] `1_shared_context/config/task-1.1/required_tools.yaml`
 - [ ] `1_shared_context/meeting_records/Task1.1_Intake_QA_Log.md`
-- [ ] `2_agent_workspaces/task-1.1-intake/phases/phase4_research.md`
-- [ ] `2_agent_workspaces/task-1.1-intake/phases/Research_Trace_Log.md`
-- [ ] `2_agent_workspaces/task-1.1-intake/phases/phase5_questionnaire.md`
+- [ ] `2_agent_workspaces/task-1.1-intake/.task_state.md`
+- [ ] `2_agent_workspaces/task-1.1-intake/config/required_skills.yaml`
+- [ ] `2_agent_workspaces/task-1.1-intake/config/required_tools.yaml`
+- [ ] `2_agent_workspaces/task-1.1-intake/phases/context_baseline.md`
+- [ ] `2_agent_workspaces/task-1.1-intake/phases/research_conclusion.md`
+- [ ] `2_agent_workspaces/task-1.1-intake/Research_Trace_Log.md`
+- [ ] `2_agent_workspaces/task-1.1-intake/phases/questionnaire.md`
 - [ ] `2_agent_workspaces/task-1.1-intake/templates/OUT-1.1_Template_Custom.md`
 - [ ] `3_final_outputs/OUT-1.1_[Topic].md`
-- [ ] `3_final_outputs/diagrams/OUT-1.1_[Topic]_*.drawio`
-- [ ] Updated `architect/doc/Architect SOP.md`
-- [ ] Updated `architect/doc/specs/Project_Global_IO_Pipeline_Template.md`
-
-## Downstream Impact
-
-Your OUT-1.1 output directly impacts:
-
-- **OUT-1.2 (NFR)**: Business scenarios determine QPS baselines, availability levels
-- **OUT-2.1 (Code Analysis)**: Feature names provide domain terms for grep searches
-- **OUT-3.1 (Architecture)**: Executive summary is the yardstick for evaluating candidate solutions
-- **OUT-4.1 (API Design)**: Each feature likely maps to REST endpoints or gRPC contracts
-- **OUT-5.1 (Blast Radius)**: Out of scope defines no-fly zones for refactoring
+- [ ] `3_final_outputs/diagrams/UC-xx-*.drawio`
 
 ## Common Pitfalls
 
-❌ **Asking for macro intent directly** → Must read Master_Context_Board.md first
-❌ **Keeping interview logs in workspace** → Must go to `1_shared_context/meeting_records/`
-❌ **Keeping configs in workspace** → Must go to `1_shared_context/config/task-1.1/`
-❌ **Using base template rigidly** → Must evolve template in Step 7
-❌ **Skipping client validation** → Must get explicit sign-off before Step 8
-❌ **Forgetting knowledge closure** → Must update SOP and Project_Global_IO_Pipeline_Template in Step 9
-
-## Checkpoint Recovery
-
-If task is interrupted, check for existing progress files:
-- `1_shared_context/config/task-1.1/`
-- `2_agent_workspaces/task-1.1-intake/phases/`
-
-Ask user: "发现已有进度存档,是否从断点恢复,还是重新开始?"
+❌ **Re-asking context already in Master Context Board** → Read the board first
+❌ **Keeping interview logs in private workspace** → Must go to `1_shared_context/meeting_records/`
+❌ **Accepting vague acceptance criteria** → Force quantification
+❌ **Storing OUT-1.1 in workspace** → Must go to `3_final_outputs/`
+❌ **Only asking questions without providing arch recommendations** → Always give a concrete downgrade option
+❌ **Not updating Master Context Board** → Must write `[已决断]` back after each client answer
 
 ## Execution Start
 
-When ready to begin, start with Step 1 confirmation log and proceed through the 9-step workflow systematically.
+On activation, immediately read `.task_state.md`, then start with Step 1 ignition log.
