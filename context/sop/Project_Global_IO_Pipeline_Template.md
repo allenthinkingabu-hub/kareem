@@ -33,11 +33,11 @@ flowchart TD
     T_PM_P0_BusinessProcess_01 ==>|用户漏斗路径设计| T_UI_P2_UIMockups_04
     T_PM_P0_BusinessProcess_01 ==>|异常分支与逆向测试场景| T_QA_P3_TestCases_05
     
-    T_BE_P1_BackendArch_03 -.->|API 契约| T_FE_P1_FrontendArch_02
+    T_BE_P1_BackendArch_03 -.->|API契约 + 错误码 + 状态枚举| T_FE_P1_FrontendArch_02
     T_FE_P1_FrontendArch_02 -.->|交互约束| T_UI_P2_UIMockups_04
     
     T_FE_P1_FrontendArch_02 -.->|全网质量网关自检| T_QA_P3_TestCases_05
-    T_BE_P1_BackendArch_03 -.->|全网质量网关自检| T_QA_P3_TestCases_05
+    T_BE_P1_BackendArch_03 -.->|API契约 + 异步链路 + 错误码覆盖| T_QA_P3_TestCases_05
 ```
 
 ---
@@ -49,7 +49,7 @@ flowchart TD
 | :--- | :--- | :--- | :--- | :--- |
 | **T_PM_P0_BusinessProcess_01** | PM / BA | `3_final_outputs/OUT-0.1_Business_Process.md` | - 项目愿景宏观蓝图 <br> - 用户原始粗口需求调研 | **全员吃粮** (T_FE_P1_FrontendArch_02, T_BE_P1_BackendArch_03, T_UI_P2_UIMockups_04, T_QA_P3_TestCases_05) |
 | **T_FE_P1_FrontendArch_02** | FE Architect | `3_final_outputs/OUT-1.1_Frontend_Arch.md` | **[强依赖] `T_PM_P0_BusinessProcess_01` 业务流程图**中的“交互动作节点”与“各端漏斗流向” | 下游 **T_UI_P2_UIMockups_04** 依照此边界设计视图元件；<br> **T_QA_P3_TestCases_05** 据此写 Mock 脚本。 |
-| **T_BE_P1_BackendArch_03** | BE Architect | `3_final_outputs/OUT-1.2_Backend_Arch.md` | **[强依赖] `T_PM_P0_BusinessProcess_01` 业务流程图**中的“数据流转换”、“外部协同 API”与“状态机变更基点” | 前端基于此开发 API 层；<br> 下游 **T_QA_P3_TestCases_05** 构建集成测试校验通过率。 |
+| **T_BE_P1_BackendArch_03** | BE Architect | `3_final_outputs/OUT-1.2_Backend_Arch.md` <br> 📋 模版: `docs/template/OUT-1.2_Backend_Arch.md` <br> 📎 附件: `3_final_outputs/diagrams/backend_service_topology.drawio`, `backend_er_diagram.drawio`, `[entity]_state_machine.drawio` | **[强依赖] `T_PM_P0_BusinessProcess_01` 业务流程图**中的"数据流转换"、"外部协同 API"与"状态机变更基点" | **T_FE_P1_FrontendArch_02**: API契约(OUT-1.2 §5) + 错误码(§7) + 状态枚举(§4) <br> **T_UI_P2_UIMockups_04**: Schema字段(§3) + 状态色值(§4) + 错误提示样式(§7) <br> **T_QA_P3_TestCases_05**: API(§5) + 异步链路(§6) + 错误码(§7) + | **T_BE_P1_BackendArch_03** | BE Architect | `3_final_outputs/OUT-1.2_Backend_Arch.md` <br> 📋 模版: `docs/template/OUT-1.2_Backend_Arch.md` <br> 📎 附件: `3_final_outputs/diagrams/backend_service_topology.drawio`, `backend_er_diagram.drawio`, `[entity]_state_machine.drawio` | **[强依赖] `T_PM_P0_BusinessProcess_01` 业务流程图**中的"数据流转换"、"外部协同 API"与"状态机变更基点" | **T_FE_P1_FrontendArch_02**: API契约(OUT-1.2 §5) + 错误码(§7) + 状态枚举(§4) <br> **T_UI_P2_UIMockups_04**: Schema字段(§3) + 状态色值(§4) + 错误提示样式(§7) <br> **T_QA_P3_TestCases_05**: API(§5) + 异步链路(§6) + 错误码(§7) + 安全(§8) | **[强依赖] `T_PM_P0_BusinessProcess_01` 业务流程图**中的“数据流转换”、“外部协同 API”与“状态机变更基点” | 前端基于此开发 API 层；<br> 下游 **T_QA_P3_TestCases_05** 构建集成测试校验通过率。 |
 | **T_UI_P2_UIMockups_04** | UI/UX Designer | `3_final_outputs/diagrams/Figma_Export/` | **[强依赖] `T_PM_P0_BusinessProcess_01` 业务流程图**定义的流转逻辑（几步注册、失败退回哪），结合 `T_FE_P1_FrontendArch_02` 的前台组件库规范。 | 前端物理堆码页面的源文件；<br> 产品经理走查。 |
 | **T_QA_P3_TestCases_05** | QA Engineer | `3_final_outputs/OUT-3.1_Test_Cases.md` | **[终极强依赖] `T_PM_P0_BusinessProcess_01` 中的异常与逆向防御边界（第5章）**，并收口检验 02/03 是否满足这些防御底线。 | 全盘质量出口闸口。不通过则驳回重做。 |
 
