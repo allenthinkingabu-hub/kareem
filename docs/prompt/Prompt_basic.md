@@ -1,0 +1,1 @@
+ 请更加这个implement_plan ，生成一个 能让 skill-creator 生成 ai agent skill 的 prompt， 这个prompt 必须能让 skill-creator 完整生成，并且要检查skill-creator生成结果，生成报告，这个skill 会生成当前文件夹下skills 下面，  而且，这是无限循环，直到skill creatro 这个skill 能够生成完美的 ai agent skill. 最后安装好，比如给 claude, codex,opencode 等
